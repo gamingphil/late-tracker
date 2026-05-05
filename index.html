@@ -68,9 +68,7 @@
 
   /* spinner */
   @keyframes spin { to { transform: rotate(360deg); } }
-  .spinner { width: 18px; height: 18px; border: 2px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 6px; }
-  .btn .spinner { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); margin: 0; }
-  .btn.loading .btn-text { opacity: 0; }
+  .spinner { width: 16px; height: 16px; border: 2px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; flex-shrink: 0; }
 
   /* full-screen loader */
   #page-loader {
@@ -132,13 +130,7 @@
   .result-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .result-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
 
-  /* hash generator */
-  .hash-gen { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
-  .hash-gen summary { font-family: var(--mono); font-size: 11px; color: var(--dim); cursor: pointer; letter-spacing: 0.06em; text-transform: uppercase; list-style: none; }
-  .hash-gen summary::-webkit-details-marker { display: none; }
-  .hash-gen summary::before { content: '▶ '; }
-  details[open] .hash-gen summary::before { content: '▼ '; }
-  .hash-gen-body { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  /* hash output box */
   .hash-output { font-family: var(--mono); font-size: 11px; color: var(--accent); background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; word-break: break-all; min-height: 36px; }
 
   /* modal */
@@ -245,10 +237,7 @@
             <span class="bet-icon">⚡</span>ON TIME
           </button>
         </div>
-        <button class="btn btn-primary" id="submit-bet-btn" onclick="submitBet()" disabled>
-          <span class="spinner" style="display:none;" id="bet-spinner"></span>
-          <span class="btn-text">Place bet</span>
-        </button>
+        <button class="btn btn-primary" id="submit-bet-btn" onclick="submitBet()" disabled>Place bet</button>
         <p class="hint mt-8" id="bet-feedback" style="text-align:center;"></p>
       </div>
       <div class="card">
@@ -290,21 +279,16 @@
         <div class="card-label" style="color:var(--accent);">Admin access</div>
         <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Enter the password to record today's result.</p>
         <input type="password" id="admin-pw-input" placeholder="Password…" style="margin-bottom:12px;" />
-        <button class="btn btn-primary" id="unlock-btn" onclick="tryUnlock()">
-          <span class="spinner" style="display:none;" id="unlock-spinner"></span>
-          <span class="btn-text">Unlock</span>
-        </button>
-        <details style="margin-top:0;">
-          <div class="hash-gen">
-            <summary>Generate a new password hash</summary>
-            <div class="hash-gen-body">
-              <p style="font-size:12px;color:var(--muted);line-height:1.5;">Type a new password below, copy the hash, and paste it as <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">ADMIN_HASH</code> in the source file.</p>
-              <input type="password" id="hash-input" placeholder="New password…" oninput="generateHash()" />
-              <div class="hash-output" id="hash-output">hash will appear here</div>
-              <button class="btn" onclick="copyHash()" style="padding:9px;">Copy hash</button>
-            </div>
+        <button class="btn btn-primary" id="unlock-btn" onclick="tryUnlock()">Unlock</button>
+        <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px;">
+          <button onclick="toggleHashGen()" id="hash-gen-toggle" style="background:none;border:none;font-family:var(--mono);font-size:11px;color:var(--dim);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;padding:4px 0;width:100%;text-align:left;">▶ Generate a new password hash</button>
+          <div id="hash-gen-body" style="display:none;margin-top:10px;display:none;flex-direction:column;gap:8px;">
+            <p style="font-size:12px;color:var(--muted);line-height:1.5;">Type a new password, copy the hash, and paste it as <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">ADMIN_HASH</code> in the source file.</p>
+            <input type="password" id="hash-input" placeholder="New password…" oninput="generateHash()" />
+            <div class="hash-output" id="hash-output">hash will appear here</div>
+            <button class="btn" onclick="copyHash()" style="padding:9px;">Copy hash</button>
           </div>
-        </details>
+        </div>
       </div>
 
       <!-- unlocked -->
@@ -315,10 +299,7 @@
             <button class="result-btn" id="res-late" onclick="selectResult('late')">Was late</button>
             <button class="result-btn" id="res-ontime" onclick="selectResult('ontime')">On time</button>
           </div>
-          <button class="btn btn-primary" id="submit-result-btn" onclick="submitResult()" disabled>
-            <span class="spinner" style="display:none;" id="result-spinner"></span>
-            <span class="btn-text">Record &amp; score everyone</span>
-          </button>
+          <button class="btn btn-primary" id="submit-result-btn" onclick="submitResult()" disabled>Record &amp; score everyone</button>
           <p class="hint mt-8" id="result-feedback" style="text-align:center;"></p>
         </div>
         <div class="card mt-12">
@@ -339,10 +320,10 @@
 // ADMIN_HASH: SHA-256 hash of your admin password.
 // Use the hash generator in the Admin tab to get a new one.
 // Default hash below = SHA-256("lategang") — change it!
-const JSONBIN_ACCESS_KEY = '$2a$10$IbZRC80a7Ds2N3gffoccxuPw2RRPQomOpplCxEHV9J8LbTM11NYoG';
+const JSONBIN_ACCESS_KEY = '$2a$10$chPnEAeiieKiyLJyF9ZEhOYFyHxE0BLb5yXJKzMZ4BC8Hot2Rxdgm';
 const JSONBIN_BIN        = '69f9bd1c856a682189aacdc7';
-const TARGET_NAME        = 'Emil';
-const ADMIN_HASH         = 'e35c589aaa82e56c3b9f5142048aa68d6f2c9d56563bf4a99cab06899887e1f3';
+const TARGET_NAME        = 'him';   // e.g. 'Marco'
+const ADMIN_HASH         = 'b94d27b9934d3e08a52e52d7da7dabfac484efe04294e576dc39c4e5c13f5b5a'; // SHA-256("lategang") — replace after generating yours
 // ─────────────────────────────────────────────────────────────────
 
 const COLORS = ['#7b61e8','#3aad72','#e8533a','#e8a83a','#3a9de8','#e83a9d','#3ae8d4','#a8e83a'];
@@ -398,6 +379,7 @@ async function boot(){
   document.getElementById('main-app').style.display = '';
   updateCountdown();
   await fetchData();
+  checkPopupOnLoad();
   // hide page loader
   const loader = document.getElementById('page-loader');
   loader.classList.add('hidden');
@@ -454,6 +436,17 @@ async function fetchData(){
     renderAll();
   } catch(e){
     toast('Could not load data — check connection');
+  }
+}
+
+// Called once on boot after first fetchData — shows popup if result already recorded today
+function checkPopupOnLoad(){
+  const key = todayKey();
+  const seenKey = 'lt_popup_seen_'+key;
+  if(localStorage.getItem(seenKey)) return; // already dismissed today
+  const todayResult = (data.history||[]).find(h=>h.date===key);
+  if(todayResult){
+    showResultPopup(todayResult.result, todayResult.bets);
   }
 }
 
@@ -526,11 +519,26 @@ function renderHistory(){
 }
 
 function checkBetStatus(){
-  const myBet=(data.todayBets[todayKey()]||{})[myName];
+  const key = todayKey();
+  const myBet = (data.todayBets[key]||{})[myName];
+  const resultRecorded = !!(data.history||[]).find(h=>h.date===key);
+  const locked = !!myBet || resultRecorded;
+
+  // lock/unlock the choice buttons
+  document.getElementById('btn-late').disabled = locked;
+  document.getElementById('btn-ontime').disabled = locked;
+  document.getElementById('btn-late').style.opacity = locked ? '0.45' : '';
+  document.getElementById('btn-ontime').style.opacity = locked ? '0.45' : '';
+  document.getElementById('btn-late').style.cursor = locked ? 'default' : '';
+  document.getElementById('btn-ontime').style.cursor = locked ? 'default' : '';
+
   if(myBet){
     selectBet(myBet, true);
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-feedback').textContent='Bet placed ✓';
+    document.getElementById('bet-feedback').textContent = resultRecorded ? 'Betting closed — result recorded' : 'Bet placed ✓';
+  } else if(resultRecorded){
+    document.getElementById('submit-bet-btn').disabled=true;
+    document.getElementById('bet-feedback').textContent = 'Betting closed — result already recorded for today';
   } else {
     document.getElementById('submit-bet-btn').disabled=currentBet===null;
     document.getElementById('bet-feedback').textContent='';
@@ -552,31 +560,33 @@ function selectBet(choice, silent){
   if(!silent) document.getElementById('submit-bet-btn').disabled=false;
 }
 
-function setBtnLoading(btnId, spinnerId, on){
-  const btn=document.getElementById(btnId), sp=document.getElementById(spinnerId);
-  btn.disabled=on;
-  sp.style.display=on?'inline-block':'none';
+function setBtnLoading(btnId, label, on){
+  const btn = document.getElementById(btnId);
+  btn.disabled = on;
+  btn.innerHTML = on
+    ? `<span class="spinner"></span>${label}`
+    : label;
 }
 
 async function submitBet(){
   if(!myName) return toast('Set your name first');
   if(!currentBet) return toast('Pick late or on time');
-  setBtnLoading('submit-bet-btn','bet-spinner',true);
+  setBtnLoading('submit-bet-btn', 'Place bet', true);
   document.getElementById('bet-feedback').textContent='Submitting…';
   const key=todayKey();
   try {
-    await fetchData(); // refresh before writing to avoid race conditions
+    await fetchData();
     if(!data.todayBets[key]) data.todayBets[key]={};
-    if(data.todayBets[key][myName]){ checkBetStatus(); setBtnLoading('submit-bet-btn','bet-spinner',false); return toast('Already bet today!'); }
+    if(data.todayBets[key][myName]){ checkBetStatus(); setBtnLoading('submit-bet-btn','Place bet',false); return toast('Already bet today!'); }
     data.todayBets[key][myName]=currentBet;
     await writeBin(data);
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-spinner').style.display='none';
+    document.getElementById('submit-bet-btn').textContent='Place bet';
     document.getElementById('bet-feedback').textContent='Bet placed ✓';
     renderTodayBets();
     toast(currentBet==='late'?'Bet placed: Late!':'Bet placed: On time!');
   } catch(e){
-    setBtnLoading('submit-bet-btn','bet-spinner',false);
+    setBtnLoading('submit-bet-btn','Place bet',false);
     document.getElementById('bet-feedback').textContent='';
     toast('Could not save — check connection');
   }
@@ -586,9 +596,9 @@ async function submitBet(){
 async function tryUnlock(){
   const pw = document.getElementById('admin-pw-input').value;
   if(!pw) return toast('Enter the password');
-  setBtnLoading('unlock-btn','unlock-spinner',true);
+  setBtnLoading('unlock-btn', 'Unlock', true);
   const hash = await sha256(pw);
-  setBtnLoading('unlock-btn','unlock-spinner',false);
+  setBtnLoading('unlock-btn', 'Unlock', false);
   if(hash === ADMIN_HASH){
     adminUnlocked=true;
     document.getElementById('admin-locked').style.display='none';
@@ -619,13 +629,13 @@ function selectResult(choice){
 
 async function submitResult(){
   if(!pendingResult) return;
-  setBtnLoading('submit-result-btn','result-spinner',true);
+  setBtnLoading('submit-result-btn', 'Record & score everyone', true);
   const key=todayKey();
   try {
     await fetchData();
     if((data.history||[]).find(h=>h.date===key)){
       checkResultStatus();
-      setBtnLoading('submit-result-btn','result-spinner',false);
+      setBtnLoading('submit-result-btn','Record & score everyone',false);
       return toast('Already recorded today!');
     }
     const bets=data.todayBets[key]||{}, result=pendingResult;
@@ -642,14 +652,14 @@ async function submitResult(){
     pendingResult=null;
     document.getElementById('res-late').className='result-btn';
     document.getElementById('res-ontime').className='result-btn';
-    setBtnLoading('submit-result-btn','result-spinner',false);
+    setBtnLoading('submit-result-btn','Record & score everyone',false);
     document.getElementById('submit-result-btn').disabled=true;
     document.getElementById('result-feedback').textContent=`Recorded: ${result==='late'?'Late':'On time'} — ${winners.length} correct`;
     renderAll();
     showResultPopup(result, bets);
     toast(result==='late'?'Recorded: he was late!':'Recorded: on time!');
   } catch(e){
-    setBtnLoading('submit-result-btn','result-spinner',false);
+    setBtnLoading('submit-result-btn','Record & score everyone',false);
     toast('Could not save — check connection');
   }
 }
@@ -686,10 +696,18 @@ function showResultPopup(result, bets){
 }
 
 function closeResultPopup(){
+  localStorage.setItem('lt_popup_seen_'+todayKey(), '1');
   document.getElementById('result-popup-overlay').style.display='none';
 }
 
 // ── Hash generator ──
+function toggleHashGen(){
+  const body = document.getElementById('hash-gen-body');
+  const btn  = document.getElementById('hash-gen-toggle');
+  const open = body.style.display === 'flex';
+  body.style.display = open ? 'none' : 'flex';
+  btn.textContent = (open ? '▶' : '▼') + ' Generate a new password hash';
+}
 let hashDebounce;
 function generateHash(){
   clearTimeout(hashDebounce);
