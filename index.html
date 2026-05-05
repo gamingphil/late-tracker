@@ -268,12 +268,12 @@ let currentBet = null, pendingResult = null;
 // ── JSONBin ──
 const BIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
 async function readBin(){
-  const r = await fetch(BIN_URL+'/latest',{ headers:{'X-Master-Key':JSONBIN_KEY,'X-Bin-Meta':'false'} });
+  const r = await fetch(BIN_URL+'/latest',{ headers:{'X-Access-Key':JSONBIN_KEY,'X-Bin-Meta':'false'} });
   if(!r.ok) throw new Error(r.status);
   return r.json();
 }
 async function writeBin(d){
-  const r = await fetch(BIN_URL,{ method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY}, body:JSON.stringify(d) });
+  const r = await fetch(BIN_URL,{ method:'PUT', headers:{'Content-Type':'application/json','X-Access-Key':JSONBIN_KEY}, body:JSON.stringify(d) });
   if(!r.ok) throw new Error(r.status);
 }
 
