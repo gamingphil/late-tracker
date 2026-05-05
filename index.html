@@ -39,158 +39,45 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* ── layout ── */
   .app { max-width: 440px; margin: 0 auto; padding: 0 16px 100px; }
 
-  /* ── header ── */
-  .header {
-    padding: 56px 0 28px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 28px;
-  }
-  .header-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
+  .header { padding: 56px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  .header-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
   .header h1 { font-size: 28px; font-weight: 600; line-height: 1.1; }
   .header h1 span { color: var(--late); }
-  .header-date {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 10px;
-  }
+  .header-date { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 10px; }
+  .header-name { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 4px; cursor: pointer; }
+  .header-name:hover { color: var(--muted); }
 
-  /* ── tabs ── */
-  .tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 28px;
-    background: var(--surface);
-    border-radius: var(--radius);
-    padding: 4px;
-    border: 1px solid var(--border);
-  }
-  .tab {
-    flex: 1;
-    padding: 9px 6px;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    border-radius: 9px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .tab.active {
-    background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
+  .tabs { display: flex; gap: 4px; margin-bottom: 28px; background: var(--surface); border-radius: var(--radius); padding: 4px; border: 1px solid var(--border); }
+  .tab { flex: 1; padding: 9px 6px; border: none; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 13px; font-weight: 500; border-radius: 9px; cursor: pointer; transition: all 0.15s; }
+  .tab.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
 
-  /* ── cards ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    margin-bottom: 12px;
-  }
-  .card-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; }
+  .card-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 
-  /* ── inputs ── */
-  input[type="text"], input[type="password"] {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    padding: 11px 14px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
+  input[type="text"], input[type="password"] { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; color: var(--text); font-family: var(--sans); font-size: 15px; padding: 11px 14px; outline: none; transition: border-color 0.15s; }
   input[type="text"]:focus, input[type="password"]:focus { border-color: var(--dim); }
 
-  /* ── buttons ── */
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 13px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--surface2);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: center;
-  }
+  .btn { display: block; width: 100%; padding: 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--text); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; }
   .btn:hover { border-color: var(--dim); background: #2e2e32; }
   .btn:active { transform: scale(0.98); }
   .btn:disabled { opacity: 0.35; cursor: default; transform: none; }
-  .btn-primary {
-    background: var(--text);
-    color: var(--bg);
-    border-color: transparent;
-    font-weight: 600;
-  }
+  .btn-primary { background: var(--text); color: var(--bg); border-color: transparent; font-weight: 600; }
   .btn-primary:hover { background: #d8d8d5; border-color: transparent; }
 
-  /* ── bet buttons ── */
   .bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .bet-btn {
-    padding: 20px 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface2);
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-align: center;
-    letter-spacing: 0.05em;
-  }
+  .bet-btn { padding: 20px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface2); color: var(--muted); font-family: var(--mono); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; letter-spacing: 0.05em; }
   .bet-btn .bet-icon { font-size: 26px; display: block; margin-bottom: 8px; }
   .bet-btn:hover { border-color: var(--dim); }
   .bet-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .bet-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
 
-  /* ── leaderboard ── */
-  .lb-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .lb-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .lb-row:last-child { border-bottom: none; }
   .lb-rank { font-family: var(--mono); font-size: 12px; color: var(--muted); width: 28px; flex-shrink: 0; }
   .lb-rank.gold { color: var(--accent); }
-  .avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 12px; font-weight: 500;
-    flex-shrink: 0;
-  }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; font-weight: 500; flex-shrink: 0; }
   .lb-name { flex: 1; font-size: 15px; font-weight: 500; }
   .lb-right { text-align: right; }
   .lb-pct { font-family: var(--mono); font-size: 16px; font-weight: 500; }
@@ -198,21 +85,11 @@
   .pct-bar { height: 3px; background: var(--surface2); border-radius: 2px; margin-top: 4px; overflow: hidden; }
   .pct-fill { height: 100%; border-radius: 2px; background: var(--ontime); }
 
-  /* ── chips ── */
-  .chip {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 10px; border-radius: 20px; font-size: 12px;
-    font-family: var(--mono); margin: 3px;
-  }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-family: var(--mono); margin: 3px; }
   .chip-late { background: var(--late-bg); color: var(--late); border: 1px solid var(--late-border); }
   .chip-ontime { background: var(--ontime-bg); color: var(--ontime); border: 1px solid var(--ontime-border); }
 
-  /* ── history ── */
-  .hist-row {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
+  .hist-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .hist-row:last-child { border-bottom: none; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .dot-late { background: var(--late); }
@@ -223,131 +100,77 @@
   .ontime-color { color: var(--ontime); }
   .hist-score { font-family: var(--mono); font-size: 11px; color: var(--dim); }
 
-  /* ── stat cards ── */
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
   .stat-val { font-family: var(--mono); font-size: 28px; font-weight: 500; }
-  .stat-val.late-color { color: var(--late); }
-  .stat-val.ontime-color { color: var(--ontime); }
   .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
-  /* ── setup screen ── */
-  .setup-screen {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 32px 16px;
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .setup-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
-  .setup-sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; line-height: 1.6; }
-  .setup-step { margin-bottom: 20px; }
-  .setup-step-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 7px; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+  .mt-8 { margin-top: 8px; }
 
-  /* ── toast ── */
-  .toast {
-    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: var(--text); color: var(--bg);
-    padding: 10px 20px; border-radius: 24px;
-    font-size: 14px; font-weight: 500;
-    opacity: 0; transition: all 0.25s;
-    pointer-events: none; white-space: nowrap; z-index: 999;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 24px; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 100%; max-width: 360px; }
+  .modal h2 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .modal p { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+  .modal input { margin-bottom: 12px; }
 
-  /* ── loading ── */
-  .loading { text-align: center; padding: 40px; color: var(--muted); font-family: var(--mono); font-size: 13px; }
-
-  /* ── empty ── */
-  .empty { text-align: center; padding: 32px; color: var(--dim); font-size: 14px; }
-
-  /* ── result panel ── */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .result-btn {
-    padding: 14px; border: 1px solid var(--border); border-radius: 9px;
-    background: var(--surface2); color: var(--muted);
-    font-family: var(--sans); font-size: 14px; font-weight: 500;
-    cursor: pointer; transition: all 0.15s;
-  }
+  .result-btn { padding: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--muted); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .result-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .result-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
 
-  /* ── setup link ── */
-  .setup-link { color: var(--muted); font-size: 12px; text-align: center; margin-top: 16px; cursor: pointer; text-decoration: underline; }
+  .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 24px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--ontime); cursor: pointer; }
-
-  .inline-row { display: flex; align-items: center; gap: 10px; }
-  .gap-8 { gap: 8px !important; }
-  .mt-8 { margin-top: 8px; }
-  .mt-12 { margin-top: 12px; }
-  .hint { font-size: 12px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+  .empty { text-align: center; padding: 32px; color: var(--dim); font-size: 14px; }
+  input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--ontime); cursor: pointer; flex-shrink: 0; }
 </style>
 </head>
 <body>
 
-<!-- SETUP SCREEN -->
-<div id="setup-screen" style="display:none;">
-  <div class="setup-screen">
-    <div class="header-eyebrow" style="margin-bottom:16px;">Late Tracker — First time setup</div>
-    <div class="setup-title">Let's get you set up</div>
-    <div class="setup-sub">You only need to do this once. Your settings are saved on this device.</div>
+<!-- NAME MODAL -->
+<div class="modal-overlay" id="name-modal">
+  <div class="modal">
+    <h2>Hey, who are you?</h2>
+    <p>Just your name — so everyone knows whose bet is whose. You only do this once.</p>
+    <input type="text" id="modal-name" placeholder="Your name…" maxlength="24" />
+    <button class="btn btn-primary" onclick="saveNameFromModal()">Let's go</button>
+  </div>
+</div>
 
-    <div class="setup-step">
-      <div class="setup-step-label">Step 1 — Your name</div>
-      <input type="text" id="setup-name" placeholder="e.g. Luca" />
-    </div>
-
-    <div class="setup-step">
-      <div class="setup-step-label">Step 2 — Friend being tracked</div>
-      <input type="text" id="setup-target" placeholder="e.g. Marco" />
-      <p class="hint">This is the friend everyone bets on. Only set this once across the group.</p>
-    </div>
-
-    <div class="setup-step">
-      <div class="setup-step-label">Step 3 — JSONBin API key</div>
-      <input type="password" id="setup-apikey" placeholder="Paste your Master Key here" />
-      <p class="hint">Get a free key at <strong>jsonbin.io</strong> → sign up → API Keys → copy your Master Key. Everyone uses the same key.</p>
-    </div>
-
-    <div class="setup-step">
-      <div class="setup-step-label">Step 4 — JSONBin Bin ID <span style="color:var(--dim)">(optional for first person)</span></div>
-      <input type="text" id="setup-binid" placeholder="e.g. 6650abc123..." />
-      <p class="hint">If you're the first person: leave blank, the app creates a bin for you. Everyone else: paste the Bin ID shared by the first person.</p>
-    </div>
-
-    <div class="setup-step">
-      <div class="inline-row">
-        <input type="checkbox" id="setup-admin" />
-        <label for="setup-admin" style="font-size:14px; cursor:pointer;">I'm the admin (I'll record the daily result)</label>
-      </div>
-      <p class="hint">Only one person needs to be admin. The admin records whether he was actually late or not.</p>
-    </div>
-
-    <button class="btn btn-primary" onclick="completeSetup()">Save and start</button>
+<!-- RENAME MODAL -->
+<div class="modal-overlay" id="rename-modal" style="display:none;">
+  <div class="modal">
+    <h2>Change your name</h2>
+    <p>Only affects your device. Past bets under the old name stay as-is.</p>
+    <input type="text" id="rename-input" placeholder="New name…" maxlength="24" />
+    <button class="btn btn-primary" onclick="confirmRename()" style="margin-bottom:8px;">Save</button>
+    <button class="btn" onclick="document.getElementById('rename-modal').style.display='none'">Cancel</button>
   </div>
 </div>
 
 <!-- MAIN APP -->
 <div id="main-app" style="display:none;">
   <div class="app">
+
     <div class="header">
       <div class="header-eyebrow">Daily tracker</div>
-      <h1>Will <span id="hdr-target">he</span> be late?</h1>
+      <h1>Will <span id="hdr-target"></span> be late?</h1>
       <div class="header-date" id="hdr-date"></div>
+      <div class="header-name" id="hdr-name" onclick="promptRename()"></div>
     </div>
 
     <div class="tabs">
       <button class="tab active" onclick="showTab('bet')">Bet</button>
       <button class="tab" onclick="showTab('leaderboard')">Ranks</button>
       <button class="tab" onclick="showTab('history')">History</button>
-      <button class="tab" onclick="showTab('settings')">Settings</button>
+      <button class="tab" onclick="showTab('admin')">Admin</button>
     </div>
 
-    <!-- BET TAB -->
+    <!-- BET -->
     <div id="tab-bet">
       <div class="card">
-        <div class="card-label">Your prediction</div>
+        <div class="card-label">Your prediction for today</div>
         <div class="bet-grid">
           <button class="bet-btn" id="btn-late" onclick="selectBet('late')">
             <span class="bet-icon">🐢</span>LATE
@@ -359,24 +182,13 @@
         <button class="btn btn-primary" id="submit-bet-btn" onclick="submitBet()" disabled>Place bet</button>
         <p class="hint mt-8" id="bet-feedback" style="text-align:center;"></p>
       </div>
-
       <div class="card">
-        <div class="card-label">Today's bets <span id="today-count" style="color:var(--dim)"></span></div>
+        <div class="card-label">Today's bets <span id="today-count" style="color:var(--dim);"></span></div>
         <div id="today-bets-list"><div class="empty" style="padding:12px 0;">No bets yet today</div></div>
-      </div>
-
-      <div class="card" id="admin-panel" style="display:none;">
-        <div class="card-label" style="color:var(--accent);">Admin — record result</div>
-        <div class="result-grid">
-          <button class="result-btn" id="res-late" onclick="selectResult('late')">Was late</button>
-          <button class="result-btn" id="res-ontime" onclick="selectResult('ontime')">On time</button>
-        </div>
-        <button class="btn btn-primary" id="submit-result-btn" onclick="submitResult()" disabled>Record &amp; score</button>
-        <p class="hint mt-8" id="result-feedback" style="text-align:center;"></p>
       </div>
     </div>
 
-    <!-- LEADERBOARD TAB -->
+    <!-- LEADERBOARD -->
     <div id="tab-leaderboard" style="display:none;">
       <div class="stat-grid">
         <div class="stat-card">
@@ -394,204 +206,148 @@
       </div>
     </div>
 
-    <!-- HISTORY TAB -->
+    <!-- HISTORY -->
     <div id="tab-history" style="display:none;">
       <div class="card">
-        <div class="card-label" style="display:flex;justify-content:space-between;">
-          Past results
-          <span id="admin-clear-wrap" style="display:none;"><button onclick="confirmClear()" style="background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;font-family:var(--mono);">clear all</button></span>
-        </div>
+        <div class="card-label">Past results</div>
         <div id="history-list"><div class="empty">No history yet</div></div>
       </div>
     </div>
 
-    <!-- SETTINGS TAB -->
-    <div id="tab-settings" style="display:none;">
-      <div class="card">
-        <div class="card-label">Your name</div>
-        <div class="inline-row">
-          <input type="text" id="s-name" style="flex:1;" />
-          <button class="btn" style="width:auto;padding:11px 16px;" onclick="saveSetting('name')">Save</button>
+    <!-- ADMIN -->
+    <div id="tab-admin" style="display:none;">
+      <div id="admin-locked" class="card">
+        <div class="card-label" style="color:var(--accent);">Admin access</div>
+        <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Enter the password to record today's result.</p>
+        <input type="password" id="admin-pw-input" placeholder="Password…" style="margin-bottom:12px;" />
+        <button class="btn btn-primary" onclick="tryUnlock()">Unlock</button>
+      </div>
+
+      <div id="admin-unlocked" style="display:none;">
+        <div class="card">
+          <div class="card-label" style="color:var(--accent);">Record today's result</div>
+          <div class="result-grid">
+            <button class="result-btn" id="res-late" onclick="selectResult('late')">Was late</button>
+            <button class="result-btn" id="res-ontime" onclick="selectResult('ontime')">On time</button>
+          </div>
+          <button class="btn btn-primary" id="submit-result-btn" onclick="submitResult()" disabled>Record &amp; score everyone</button>
+          <p class="hint mt-8" id="result-feedback" style="text-align:center;"></p>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-label">Friend being tracked</div>
-        <div class="inline-row">
-          <input type="text" id="s-target" style="flex:1;" />
-          <button class="btn" style="width:auto;padding:11px 16px;" onclick="saveSetting('target')">Save</button>
+        <div class="card">
+          <div class="card-label">Danger zone</div>
+          <button class="btn" style="color:var(--late);border-color:var(--late-border);margin-top:4px;" onclick="confirmClear()">Clear all history &amp; scores</button>
         </div>
+        <button class="btn mt-8" style="color:var(--muted);" onclick="lockAdmin()">Lock admin</button>
       </div>
-      <div class="card">
-        <div class="card-label">JSONBin API key</div>
-        <input type="password" id="s-apikey" style="margin-bottom:8px;" />
-        <div class="card-label mt-8">Bin ID</div>
-        <input type="text" id="s-binid" style="margin-bottom:8px;" />
-        <button class="btn mt-8" onclick="saveSetting('jsonbin')">Save JSONBin settings</button>
-        <p class="hint mt-8">Share your Bin ID with friends so they use the same data store.</p>
-      </div>
-      <div class="card">
-        <div class="inline-row">
-          <input type="checkbox" id="s-admin" onchange="saveSetting('admin')" />
-          <label for="s-admin" style="font-size:14px;cursor:pointer;">I'm the admin</label>
-        </div>
-      </div>
-      <button class="btn mt-8" style="color:var(--late);border-color:var(--late-border);" onclick="resetApp()">Reset this device</button>
     </div>
 
-  </div><!-- .app -->
-</div><!-- #main-app -->
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── storage keys ──
-const K = { name:'lt_name', target:'lt_target', apikey:'lt_apikey', binid:'lt_binid', admin:'lt_admin' };
-const COLORS = ['#7b61e8','#3aad72','#e8533a','#e8a83a','#3a9de8','#e83a9d','#3ae8d4','#a8e83a'];
+// ── CONFIG ── edit these to customise ──────────────────────────────
+const JSONBIN_KEY    = '$2a$10$chPnEAeiieKiyLJyF9ZEhOYFyHxE0BLb5yXJKzMZ4BC8Hot2Rxdgm';
+const JSONBIN_BIN    = '69f9bd1c856a682189aacdc7';
+const TARGET_NAME    = 'him';         // e.g. 'Marco'
+const ADMIN_PASSWORD = 'lategang';   // change to whatever you like
+// ──────────────────────────────────────────────────────────────────
 
+const COLORS = ['#7b61e8','#3aad72','#e8533a','#e8a83a','#3a9de8','#e83a9d','#3ae8d4','#a8e83a'];
 function colorFor(n){ let h=0; for(let c of n) h=(h*31+c.charCodeAt(0))%COLORS.length; return COLORS[h]; }
 function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?'; }
 function todayKey(){ return new Date().toLocaleDateString('en-CA'); }
 function fmtDate(d){ return new Date(d+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}); }
 
-// ── local settings ──
-let cfg = {};
-function loadCfg(){
-  cfg.name   = localStorage.getItem(K.name)||'';
-  cfg.target = localStorage.getItem(K.target)||'him';
-  cfg.apikey = localStorage.getItem(K.apikey)||'';
-  cfg.binid  = localStorage.getItem(K.binid)||'';
-  cfg.admin  = localStorage.getItem(K.admin)==='true';
-}
-function saveCfg(key,val){ cfg[key]=val; localStorage.setItem(K[key]||key,String(val)); }
+let myName = localStorage.getItem('lt_name')||'';
+let adminUnlocked = false;
+let data = { todayBets:{}, history:[], scores:{} };
+let currentBet = null, pendingResult = null;
 
-// ── JSONBin helpers ──
-const BIN_BASE = 'https://api.jsonbin.io/v3/b';
-
+// ── JSONBin ──
+const BIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
 async function readBin(){
-  const r = await fetch(`${BIN_BASE}/${cfg.binid}/latest`,{
-    headers:{'X-Master-Key':cfg.apikey,'X-Bin-Meta':'false'}
-  });
-  if(!r.ok) throw new Error('Read failed: '+r.status);
+  const r = await fetch(BIN_URL+'/latest',{ headers:{'X-Master-Key':JSONBIN_KEY,'X-Bin-Meta':'false'} });
+  if(!r.ok) throw new Error(r.status);
   return r.json();
 }
-
-async function writeBin(data){
-  const r = await fetch(`${BIN_BASE}/${cfg.binid}`,{
-    method:'PUT',
-    headers:{'Content-Type':'application/json','X-Master-Key':cfg.apikey},
-    body:JSON.stringify(data)
-  });
-  if(!r.ok) throw new Error('Write failed: '+r.status);
-  return r.json();
+async function writeBin(d){
+  const r = await fetch(BIN_URL,{ method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':JSONBIN_KEY}, body:JSON.stringify(d) });
+  if(!r.ok) throw new Error(r.status);
 }
 
-async function createBin(){
-  const blank = { target: cfg.target, todayBets:{}, history:[], scores:{} };
-  const r = await fetch(BIN_BASE,{
-    method:'POST',
-    headers:{'Content-Type':'application/json','X-Master-Key':cfg.apikey,'X-Bin-Name':'late-tracker'},
-    body:JSON.stringify(blank)
-  });
-  if(!r.ok) throw new Error('Create failed: '+r.status);
-  const j = await r.json();
-  return j.metadata.id;
-}
-
-// ── app state ──
-let data = { target:'him', todayBets:{}, history:[], scores:{} };
-let currentBet = null, pendingResult = null, loading = false;
-
-async function fetchData(){
-  showLoading(true);
-  try {
-    data = await readBin();
-    if(!data.todayBets) data.todayBets={};
-    if(!data.history) data.history=[];
-    if(!data.scores) data.scores={};
-    renderAll();
-  } catch(e){
-    toast('Could not load data — check API key & Bin ID');
-  }
-  showLoading(false);
-}
-
-function showLoading(on){
-  loading = on;
-  // minimal, just disable submit
-}
-
-// ── setup flow ──
-function checkSetup(){
-  loadCfg();
-  if(!cfg.name || !cfg.apikey){
-    document.getElementById('setup-screen').style.display='';
-  } else {
-    bootApp();
-  }
-}
-
-async function completeSetup(){
-  const name   = document.getElementById('setup-name').value.trim();
-  const target = document.getElementById('setup-target').value.trim();
-  const apikey = document.getElementById('setup-apikey').value.trim();
-  let   binid  = document.getElementById('setup-binid').value.trim();
-  const admin  = document.getElementById('setup-admin').checked;
-
-  if(!name)   return toast('Enter your name');
-  if(!apikey) return toast('Paste your JSONBin API key');
-
-  saveCfg('name',name);
-  saveCfg('target',target||'him');
-  saveCfg('apikey',apikey);
-  saveCfg('admin',admin);
-
-  if(!binid){
-    // create a new bin
-    toast('Creating your shared bin…');
-    try {
-      binid = await createBin();
-    } catch(e){
-      return toast('Could not create bin — check API key');
-    }
-  }
-  saveCfg('binid',binid);
-
-  document.getElementById('setup-screen').style.display='none';
-  bootApp();
-  toast('All set! Share your Bin ID: '+binid);
-}
-
-function bootApp(){
-  document.getElementById('main-app').style.display='';
-  const d = new Date();
-  document.getElementById('hdr-date').textContent = d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  applySettings();
+// ── boot ──
+function boot(){
+  document.getElementById('hdr-target').textContent = TARGET_NAME;
+  document.getElementById('stat-late-label').textContent = TARGET_NAME+"'s late rate";
+  document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('hdr-name').textContent = '— betting as '+myName+' (tap to change)';
+  document.getElementById('main-app').style.display = '';
   fetchData();
 }
 
-function applySettings(){
-  document.getElementById('hdr-target').textContent = cfg.target||'he';
-  document.getElementById('s-name').value  = cfg.name;
-  document.getElementById('s-target').value= cfg.target;
-  document.getElementById('s-apikey').value= cfg.apikey;
-  document.getElementById('s-binid').value = cfg.binid;
-  document.getElementById('s-admin').checked = cfg.admin;
-  document.getElementById('admin-panel').style.display = cfg.admin ? '' : 'none';
-  document.getElementById('admin-clear-wrap').style.display = cfg.admin ? '' : 'none';
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(!myName){
+    document.getElementById('name-modal').style.display = 'flex';
+  } else {
+    document.getElementById('name-modal').style.display = 'none';
+    boot();
+  }
+});
+
+function saveNameFromModal(){
+  const v = document.getElementById('modal-name').value.trim();
+  if(!v) return toast('Enter your name first');
+  myName = v;
+  localStorage.setItem('lt_name', v);
+  document.getElementById('name-modal').style.display = 'none';
+  boot();
+}
+document.getElementById('modal-name').addEventListener('keydown', e=>{ if(e.key==='Enter') saveNameFromModal(); });
+
+function promptRename(){
+  document.getElementById('rename-input').value = myName;
+  document.getElementById('rename-modal').style.display = 'flex';
+  setTimeout(()=>document.getElementById('rename-input').focus(), 50);
+}
+function confirmRename(){
+  const v = document.getElementById('rename-input').value.trim();
+  if(!v) return toast('Enter a name');
+  myName = v;
+  localStorage.setItem('lt_name', v);
+  document.getElementById('rename-modal').style.display = 'none';
+  document.getElementById('hdr-name').textContent = '— betting as '+myName+' (tap to change)';
+  checkBetStatus();
+  toast('Name updated');
+}
+document.getElementById('rename-input').addEventListener('keydown', e=>{ if(e.key==='Enter') confirmRename(); });
+
+// ── data ──
+async function fetchData(){
+  try {
+    data = await readBin();
+    data.todayBets = data.todayBets||{};
+    data.history   = data.history||[];
+    data.scores    = data.scores||{};
+    renderAll();
+  } catch(e){
+    toast('Could not load — check connection');
+  }
 }
 
 // ── tabs ──
 function showTab(t){
-  ['bet','leaderboard','history','settings'].forEach(x=>{
+  ['bet','leaderboard','history','admin'].forEach(x=>{
     document.getElementById('tab-'+x).style.display = x===t?'':'none';
   });
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.classList.toggle('active',['bet','leaderboard','history','settings'][i]===t);
+    el.classList.toggle('active', ['bet','leaderboard','history','admin'][i]===t);
   });
   if(t==='leaderboard'||t==='history') fetchData();
 }
 
-// ── rendering ──
+// ── render ──
 function renderAll(){
   renderTodayBets();
   renderLeaderboard();
@@ -601,29 +357,26 @@ function renderAll(){
 }
 
 function renderTodayBets(){
-  const bets = (data.todayBets||{})[todayKey()]||{};
+  const bets = data.todayBets[todayKey()]||{};
   const names = Object.keys(bets);
   const el = document.getElementById('today-bets-list');
-  document.getElementById('today-count').textContent = names.length?`(${names.length})` : '';
+  document.getElementById('today-count').textContent = names.length ? `(${names.length})` : '';
   if(!names.length){ el.innerHTML='<div class="empty" style="padding:12px 0;">No bets placed yet</div>'; return; }
   el.innerHTML = names.map(n=>`<span class="chip ${bets[n]==='late'?'chip-late':'chip-ontime'}">${initials(n)} ${n.split(' ')[0]}: ${bets[n]==='late'?'Late':'On time'}</span>`).join('');
 }
 
 function renderLeaderboard(){
   const scores = Object.entries(data.scores||{}).sort((a,b)=>{
-    const pa = a[1].total?a[1].correct/a[1].total:0;
-    const pb = b[1].total?b[1].correct/b[1].total:0;
+    const pa=a[1].total?a[1].correct/a[1].total:0, pb=b[1].total?b[1].correct/b[1].total:0;
     return pb-pa||b[1].correct-a[1].correct;
   });
   const el = document.getElementById('leaderboard-list');
   if(!scores.length){ el.innerHTML='<div class="empty">No scores yet — place some bets!</div>'; return; }
-
-  const medals = ['1st','2nd','3rd'];
+  const medals=['1st','2nd','3rd'];
   el.innerHTML = scores.map(([name,s],i)=>{
-    const pct = s.total?Math.round(s.correct/s.total*100):0;
-    const col = colorFor(name);
+    const pct=s.total?Math.round(s.correct/s.total*100):0, col=colorFor(name);
     return `<div class="lb-row">
-      <span class="lb-rank${i===0?' gold':''}">${medals[i]||i+1+'th'}</span>
+      <span class="lb-rank${i===0?' gold':''}">${medals[i]||(i+1)+'th'}</span>
       <div class="avatar" style="background:${col}22;color:${col};">${initials(name)}</div>
       <div class="lb-name">${name}</div>
       <div class="lb-right">
@@ -633,104 +386,113 @@ function renderLeaderboard(){
       </div>
     </div>`;
   }).join('');
-
-  const hist = data.history||[];
-  const late = hist.filter(h=>h.result==='late').length;
-  const pct  = hist.length?Math.round(late/hist.length*100):null;
-  document.getElementById('stat-late-pct').textContent = pct!==null?pct+'%':'—';
-  document.getElementById('stat-late-label').textContent = (cfg.target||'him').toLowerCase()+"'s late rate";
+  const hist=data.history||[], late=hist.filter(h=>h.result==='late').length;
+  document.getElementById('stat-late-pct').textContent = hist.length?Math.round(late/hist.length*100)+'%':'—';
   document.getElementById('stat-days').textContent = hist.length;
 }
 
 function renderHistory(){
-  const hist = (data.history||[]).slice(0,30);
-  const el = document.getElementById('history-list');
+  const hist=(data.history||[]).slice(0,40);
+  const el=document.getElementById('history-list');
   if(!hist.length){ el.innerHTML='<div class="empty">No history yet.</div>'; return; }
-  el.innerHTML = hist.map(h=>`
+  el.innerHTML=hist.map(h=>`
     <div class="hist-row">
       <div class="dot ${h.result==='late'?'dot-late':'dot-ontime'}"></div>
       <span class="hist-date">${fmtDate(h.date)}</span>
       <span class="hist-result ${h.result==='late'?'late-color':'ontime-color'}">${h.result==='late'?'Late':'On time'}</span>
-      <span class="hist-score">${h.winners?h.winners.length:0} correct</span>
+      <span class="hist-score">${(h.winners||[]).length} correct</span>
     </div>`).join('');
 }
 
 function checkBetStatus(){
-  const bets = (data.todayBets||{})[todayKey()]||{};
-  const myBet = bets[cfg.name];
+  const myBet=(data.todayBets[todayKey()]||{})[myName];
   if(myBet){
     selectBet(myBet, true);
-    document.getElementById('submit-bet-btn').disabled = true;
-    document.getElementById('bet-feedback').textContent = 'Bet placed ✓';
+    document.getElementById('submit-bet-btn').disabled=true;
+    document.getElementById('bet-feedback').textContent='Bet placed ✓';
   } else {
-    document.getElementById('submit-bet-btn').disabled = currentBet===null;
-    document.getElementById('bet-feedback').textContent = '';
+    document.getElementById('submit-bet-btn').disabled=currentBet===null;
+    document.getElementById('bet-feedback').textContent='';
   }
 }
 
 function checkResultStatus(){
-  const key = todayKey();
-  const already = (data.history||[]).find(h=>h.date===key);
-  const el = document.getElementById('result-feedback');
-  if(already){
-    document.getElementById('submit-result-btn').disabled = true;
-    el.textContent = `Result already recorded: ${already.result==='late'?'Late':'On time'}`;
-  } else {
-    document.getElementById('submit-result-btn').disabled = pendingResult===null;
-    el.textContent = '';
-  }
+  const already=(data.history||[]).find(h=>h.date===todayKey());
+  document.getElementById('submit-result-btn').disabled = !!(already||pendingResult===null);
+  document.getElementById('result-feedback').textContent = already
+    ? `Already recorded: ${already.result==='late'?'Late':'On time'}` : '';
 }
 
 // ── betting ──
 function selectBet(choice, silent){
-  currentBet = choice;
-  document.getElementById('btn-late').className  = 'bet-btn'+(choice==='late'?' sel-late':'');
-  document.getElementById('btn-ontime').className= 'bet-btn'+(choice==='ontime'?' sel-ontime':'');
-  if(!silent) document.getElementById('submit-bet-btn').disabled = false;
+  currentBet=choice;
+  document.getElementById('btn-late').className='bet-btn'+(choice==='late'?' sel-late':'');
+  document.getElementById('btn-ontime').className='bet-btn'+(choice==='ontime'?' sel-ontime':'');
+  if(!silent) document.getElementById('submit-bet-btn').disabled=false;
 }
 
 async function submitBet(){
-  if(!cfg.name) return toast('Enter your name in Settings first');
+  if(!myName) return toast('Set your name first');
   if(!currentBet) return toast('Pick late or on time');
-  const key = todayKey();
-  const bets = data.todayBets||{};
-  if(bets[key]&&bets[key][cfg.name]) return toast('Already bet today!');
-  if(!bets[key]) bets[key] = {};
-  bets[key][cfg.name] = currentBet;
-  data.todayBets = bets;
+  const key=todayKey();
+  await fetchData();
+  if(!data.todayBets[key]) data.todayBets[key]={};
+  if(data.todayBets[key][myName]){ checkBetStatus(); return toast('Already bet today!'); }
+  data.todayBets[key][myName]=currentBet;
   try {
     await writeBin(data);
-    document.getElementById('submit-bet-btn').disabled = true;
-    document.getElementById('bet-feedback').textContent = 'Bet placed ✓';
+    document.getElementById('submit-bet-btn').disabled=true;
+    document.getElementById('bet-feedback').textContent='Bet placed ✓';
     renderTodayBets();
-    toast(currentBet==='late'?'Bet: Late!':'Bet: On time!');
+    toast(currentBet==='late'?'Bet placed: Late!':'Bet placed: On time!');
   } catch(e){ toast('Could not save — check connection'); }
 }
 
-// ── result ──
+// ── admin ──
+function tryUnlock(){
+  const pw=document.getElementById('admin-pw-input').value;
+  if(pw===ADMIN_PASSWORD){
+    adminUnlocked=true;
+    document.getElementById('admin-locked').style.display='none';
+    document.getElementById('admin-unlocked').style.display='';
+    fetchData();
+    toast('Admin unlocked');
+  } else {
+    toast('Wrong password');
+    document.getElementById('admin-pw-input').value='';
+  }
+}
+document.getElementById('admin-pw-input').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock(); });
+
+function lockAdmin(){
+  adminUnlocked=false;
+  document.getElementById('admin-locked').style.display='';
+  document.getElementById('admin-unlocked').style.display='none';
+  document.getElementById('admin-pw-input').value='';
+  pendingResult=null;
+}
+
 function selectResult(choice){
-  pendingResult = choice;
-  document.getElementById('res-late').className  = 'result-btn'+(choice==='late'?' sel-late':'');
-  document.getElementById('res-ontime').className= 'result-btn'+(choice==='ontime'?' sel-ontime':'');
-  document.getElementById('submit-result-btn').disabled = false;
+  pendingResult=choice;
+  document.getElementById('res-late').className='result-btn'+(choice==='late'?' sel-late':'');
+  document.getElementById('res-ontime').className='result-btn'+(choice==='ontime'?' sel-ontime':'');
+  document.getElementById('submit-result-btn').disabled=false;
 }
 
 async function submitResult(){
   if(!pendingResult) return;
-  const key = todayKey();
-  const already = (data.history||[]).find(h=>h.date===key);
-  if(already) return toast('Already recorded today!');
-  const bets = (data.todayBets||{})[key]||{};
-  const result = pendingResult;
+  const key=todayKey();
+  await fetchData();
+  if((data.history||[]).find(h=>h.date===key)){ checkResultStatus(); return toast('Already recorded today!'); }
+  const bets=data.todayBets[key]||{}, result=pendingResult;
   const winners=[], losers=[];
-  if(!data.scores) data.scores={};
+  data.scores=data.scores||{};
   for(const [name,bet] of Object.entries(bets)){
     if(!data.scores[name]) data.scores[name]={correct:0,total:0};
     data.scores[name].total++;
-    if(bet===result){ data.scores[name].correct++; winners.push(name); }
-    else losers.push(name);
+    if(bet===result){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
   }
-  if(!data.history) data.history=[];
+  data.history=data.history||[];
   data.history.unshift({date:key,result,bets,winners,losers});
   try {
     await writeBin(data);
@@ -738,61 +500,23 @@ async function submitResult(){
     document.getElementById('res-late').className='result-btn';
     document.getElementById('res-ontime').className='result-btn';
     document.getElementById('submit-result-btn').disabled=true;
-    document.getElementById('result-feedback').textContent=`Recorded: ${result==='late'?'Late':'On time'} — ${winners.length} got it right`;
+    document.getElementById('result-feedback').textContent=`Recorded: ${result==='late'?'Late':'On time'} — ${winners.length} correct`;
     renderAll();
     toast(result==='late'?'Recorded: he was late!':'Recorded: on time!');
   } catch(e){ toast('Could not save — check connection'); }
 }
 
-// ── settings ──
-function saveSetting(type){
-  if(type==='name'){
-    const v=document.getElementById('s-name').value.trim();
-    if(!v) return toast('Enter a name');
-    saveCfg('name',v); applySettings(); toast('Name saved');
-  } else if(type==='target'){
-    const v=document.getElementById('s-target').value.trim();
-    if(!v) return toast('Enter a name');
-    saveCfg('target',v); applySettings(); fetchData(); toast('Target updated');
-  } else if(type==='jsonbin'){
-    const k=document.getElementById('s-apikey').value.trim();
-    const b=document.getElementById('s-binid').value.trim();
-    if(!k) return toast('API key required');
-    saveCfg('apikey',k);
-    if(b) saveCfg('binid',b);
-    toast('JSONBin settings saved');
-    if(b) fetchData();
-  } else if(type==='admin'){
-    const v=document.getElementById('s-admin').checked;
-    saveCfg('admin',v); applySettings(); toast(v?'Admin mode on':'Admin mode off');
-  }
-}
-
-function resetApp(){
-  if(!confirm('Remove your settings from this device? (Shared data is preserved)')) return;
-  Object.values(K).forEach(k=>localStorage.removeItem(k));
-  location.reload();
-}
-
 async function confirmClear(){
-  if(!confirm('Clear ALL history and scores for everyone? This cannot be undone.')) return;
-  data.history=[]; data.scores={}; data.todayBets={};
+  if(!confirm('Clear ALL history and scores for everyone? Cannot be undone.')) return;
+  data={todayBets:{},history:[],scores:{}};
   await writeBin(data);
   renderAll();
   toast('All data cleared');
 }
 
 // ── toast ──
-let toastTimer;
-function toast(msg){
-  clearTimeout(toastTimer);
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  toastTimer=setTimeout(()=>el.classList.remove('show'),2400);
-}
-
-// ── boot ──
-checkSetup();
+let _tt;
+function toast(msg){ clearTimeout(_tt); const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); _tt=setTimeout(()=>el.classList.remove('show'),2500); }
 </script>
 </body>
 </html>
