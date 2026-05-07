@@ -129,6 +129,18 @@
   .result-btn { padding: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--muted); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .result-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .result-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
+  .result-btn:disabled { cursor: default; }
+
+  /* today's result banner on bet tab */
+  .result-banner { border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+  .result-banner.r-late { background: var(--late-bg); border: 1px solid var(--late-border); }
+  .result-banner.r-ontime { background: var(--ontime-bg); border: 1px solid var(--ontime-border); }
+  .result-banner.r-nobет { background: var(--surface); border: 1px solid var(--border); }
+  .result-banner-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+  .result-banner-main { font-size: 15px; font-weight: 600; }
+  .result-banner-main.late-color { color: var(--late); }
+  .result-banner-main.ontime-color { color: var(--ontime); }
+  .result-banner-sub { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
 
   /* hash output box */
   .hash-output { font-family: var(--mono); font-size: 11px; color: var(--accent); background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; word-break: break-all; min-height: 36px; }
@@ -227,6 +239,7 @@
 
     <!-- BET TAB -->
     <div id="tab-bet">
+      <div id="result-banner" style="display:none;"></div>
       <div class="card">
         <div class="card-label">Your prediction for today</div>
         <div class="bet-grid">
@@ -301,6 +314,7 @@
           </div>
           <button class="btn btn-primary" id="submit-result-btn" onclick="submitResult()" disabled>Record &amp; score everyone</button>
           <p class="hint mt-8" id="result-feedback" style="text-align:center;"></p>
+          <button class="btn mt-8" id="edit-result-btn" onclick="startEditResult()" style="display:none;color:var(--muted);font-size:13px;padding:10px;">Edit today's result</button>
         </div>
         <div class="card mt-12">
           <div class="card-label">Danger zone</div>
@@ -336,6 +350,7 @@ async function sha256(str){
 
 let myName = localStorage.getItem('lt_name')||'';
 let adminUnlocked = false;
+let editMode = false;
 let data = { todayBets:{}, history:[], scores:{} };
 let currentBet = null, pendingResult = null;
 
@@ -465,6 +480,7 @@ function renderAll(){
   renderHistory();
   checkBetStatus();
   checkResultStatus();
+  renderResultBanner();
 }
 
 function renderTodayBets(){
@@ -543,10 +559,75 @@ function checkBetStatus(){
 }
 
 function checkResultStatus(){
-  const already=(data.history||[]).find(h=>h.date===todayKey());
-  document.getElementById('submit-result-btn').disabled=!!(already||pendingResult===null);
-  document.getElementById('result-feedback').textContent = already
-    ? `Already recorded: ${already.result==='late'?'Late':'On time'}` : '';
+  const already = (data.history||[]).find(h=>h.date===todayKey());
+  const locked = !!already && !editMode;
+
+  const resLate   = document.getElementById('res-late');
+  const resOntime = document.getElementById('res-ontime');
+  const submitBtn = document.getElementById('submit-result-btn');
+  const editBtn   = document.getElementById('edit-result-btn');
+  const feedback  = document.getElementById('result-feedback');
+
+  resLate.disabled   = locked;
+  resOntime.disabled = locked;
+  resLate.style.opacity   = locked ? '0.45' : '';
+  resOntime.style.opacity = locked ? '0.45' : '';
+
+  if(already && !editMode){
+    // show which was recorded, locked
+    resLate.className   = 'result-btn'+(already.result==='late'?' sel-late':'');
+    resOntime.className = 'result-btn'+(already.result==='ontime'?' sel-ontime':'');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Record & score everyone';
+    feedback.textContent = `Recorded: ${already.result==='late'?'Late':'On time'} — ${(already.winners||[]).length} correct`;
+    editBtn.style.display = '';
+  } else if(editMode){
+    submitBtn.disabled = pendingResult === null;
+    submitBtn.textContent = 'Save corrected result';
+    feedback.textContent = 'Pick the correct result above, then save.';
+    editBtn.style.display = 'none';
+  } else {
+    submitBtn.disabled = pendingResult === null;
+    submitBtn.textContent = 'Record & score everyone';
+    feedback.textContent = '';
+    editBtn.style.display = 'none';
+  }
+}
+
+function renderResultBanner(){
+  const key = todayKey();
+  const todayEntry = (data.history||[]).find(h=>h.date===key);
+  const banner = document.getElementById('result-banner');
+  if(!todayEntry){ banner.style.display='none'; banner.innerHTML=''; return; }
+
+  const result  = todayEntry.result;
+  const myBet   = (todayEntry.bets||{})[myName];
+  const correct = myBet && myBet === result;
+  const noBet   = !myBet;
+
+  let cls, icon, mainText, mainCls, subText;
+  if(noBet){
+    cls='r-nobет'; icon='😶';
+    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} today`;
+    mainCls=''; subText='You didn\'t bet today — no points.';
+  } else if(correct){
+    cls=result==='late'?'r-late':'r-ontime'; icon='🎉';
+    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you got it!`;
+    mainCls=result==='late'?'late-color':'ontime-color'; subText='Your bet was correct ✓';
+  } else {
+    cls=result==='late'?'r-late':'r-ontime'; icon='💀';
+    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you were wrong`;
+    mainCls=result==='late'?'late-color':'ontime-color'; subText=`You bet ${myBet==='late'?'late':'on time'}`;
+  }
+
+  banner.className=`result-banner ${cls}`;
+  banner.style.display='flex';
+  banner.innerHTML=`
+    <div class="result-banner-icon">${icon}</div>
+    <div>
+      <div class="result-banner-main ${mainCls}">${mainText}</div>
+      <div class="result-banner-sub">${subText}</div>
+    </div>`;
 }
 
 // ── Betting ──
@@ -611,6 +692,7 @@ document.getElementById('admin-pw-input').addEventListener('keydown', e=>{ if(e.
 
 function lockAdmin(){
   adminUnlocked=false;
+  editMode=false;
   document.getElementById('admin-locked').style.display='';
   document.getElementById('admin-unlocked').style.display='none';
   document.getElementById('admin-pw-input').value='';
@@ -624,39 +706,79 @@ function selectResult(choice){
   document.getElementById('submit-result-btn').disabled=false;
 }
 
+function startEditResult(){
+  editMode = true;
+  pendingResult = null;
+  document.getElementById('res-late').className = 'result-btn';
+  document.getElementById('res-ontime').className = 'result-btn';
+  checkResultStatus();
+  toast('Select the corrected result');
+}
+
 async function submitResult(){
   if(!pendingResult) return;
-  setBtnLoading('submit-result-btn', 'Record & score everyone', true);
-  const key=todayKey();
+  const key = todayKey();
+  const label = editMode ? 'Save corrected result' : 'Record & score everyone';
+  setBtnLoading('submit-result-btn', label, true);
   try {
     await fetchData();
-    if((data.history||[]).find(h=>h.date===key)){
-      checkResultStatus();
+    const existingEntry = (data.history||[]).find(h=>h.date===key);
+
+    if(editMode){
+      // ── EDIT PATH: undo old scores, apply new ──
+      if(!existingEntry){ editMode=false; checkResultStatus(); setBtnLoading('submit-result-btn','Record & score everyone',false); return toast('No result to edit'); }
+      const oldResult = existingEntry.result;
+      const bets = existingEntry.bets||{};
+      // undo
+      for(const [name, bet] of Object.entries(bets)){
+        if(data.scores[name]){
+          data.scores[name].total = Math.max(0, data.scores[name].total - 1);
+          if(bet === oldResult) data.scores[name].correct = Math.max(0, data.scores[name].correct - 1);
+        }
+      }
+      // reapply
+      const winners=[], losers=[];
+      for(const [name, bet] of Object.entries(bets)){
+        if(!data.scores[name]) data.scores[name]={correct:0,total:0};
+        data.scores[name].total++;
+        if(bet===pendingResult){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
+      }
+      existingEntry.result = pendingResult;
+      existingEntry.winners = winners;
+      existingEntry.losers = losers;
+      await writeBin(data);
+      editMode = false;
+      pendingResult = null;
       setBtnLoading('submit-result-btn','Record & score everyone',false);
-      return toast('Already recorded today!');
+      renderAll();
+      toast('Result corrected & scores updated');
+
+    } else {
+      // ── NEW RECORD PATH ──
+      if(existingEntry){
+        editMode=false; checkResultStatus();
+        setBtnLoading('submit-result-btn','Record & score everyone',false);
+        return toast('Already recorded — use Edit to change it');
+      }
+      const bets = data.todayBets[key]||{}, result = pendingResult;
+      const winners=[], losers=[];
+      data.scores = data.scores||{};
+      for(const [name,bet] of Object.entries(bets)){
+        if(!data.scores[name]) data.scores[name]={correct:0,total:0};
+        data.scores[name].total++;
+        if(bet===result){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
+      }
+      data.history = data.history||[];
+      data.history.unshift({date:key, result, bets, winners, losers});
+      await writeBin(data);
+      pendingResult = null;
+      setBtnLoading('submit-result-btn','Record & score everyone',false);
+      renderAll();
+      showResultPopup(result, bets);
+      toast(result==='late'?'Recorded: he was late!':'Recorded: on time!');
     }
-    const bets=data.todayBets[key]||{}, result=pendingResult;
-    const winners=[], losers=[];
-    data.scores=data.scores||{};
-    for(const [name,bet] of Object.entries(bets)){
-      if(!data.scores[name]) data.scores[name]={correct:0,total:0};
-      data.scores[name].total++;
-      if(bet===result){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
-    }
-    data.history=data.history||[];
-    data.history.unshift({date:key,result,bets,winners,losers});
-    await writeBin(data);
-    pendingResult=null;
-    document.getElementById('res-late').className='result-btn';
-    document.getElementById('res-ontime').className='result-btn';
-    setBtnLoading('submit-result-btn','Record & score everyone',false);
-    document.getElementById('submit-result-btn').disabled=true;
-    document.getElementById('result-feedback').textContent=`Recorded: ${result==='late'?'Late':'On time'} — ${winners.length} correct`;
-    renderAll();
-    showResultPopup(result, bets);
-    toast(result==='late'?'Recorded: he was late!':'Recorded: on time!');
   } catch(e){
-    setBtnLoading('submit-result-btn','Record & score everyone',false);
+    setBtnLoading('submit-result-btn', editMode?'Save corrected result':'Record & score everyone', false);
     toast('Could not save — check connection');
   }
 }
