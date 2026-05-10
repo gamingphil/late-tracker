@@ -67,7 +67,7 @@ Place a bet for today.
 **Body**
 ```json
 {
-  "name":   "Phil",
+  "name":   "Gregor",
   "choice": "late",
   "date":   "2026-05-10"
 }
@@ -134,7 +134,7 @@ print(data['scores'])
 
 # Place a bet
 response = requests.post(f'{BASE}/bet', json={
-    'name':   'Phil',
+    'name':   'Gregor',
     'choice': 'late',
     'date':   TODAY
 })
