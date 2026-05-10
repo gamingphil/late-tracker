@@ -10,30 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0e0e0f;
-    --surface: #1a1a1c;
-    --surface2: #242427;
-    --border: #2e2e33;
-    --text: #f0f0ee;
-    --muted: #888886;
-    --dim: #444442;
-    --late: #e8533a;
-    --late-bg: #2a1410;
-    --late-border: #5a2318;
-    --ontime: #3aad72;
-    --ontime-bg: #0e2518;
-    --ontime-border: #1d5a38;
-    --accent: #f0c040;
-    --radius: 12px;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
+    --bg: #0e0e0f; --surface: #1a1a1c; --surface2: #242427; --border: #2e2e33;
+    --text: #f0f0ee; --muted: #888886; --dim: #444442;
+    --late: #e8533a; --late-bg: #2a1410; --late-border: #5a2318;
+    --ontime: #3aad72; --ontime-bg: #0e2518; --ontime-border: #1d5a38;
+    --accent: #f0c040; --radius: 12px;
+    --mono: 'DM Mono', monospace; --sans: 'DM Sans', sans-serif;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: env(safe-area-inset-bottom); }
   .app { max-width: 440px; margin: 0 auto; padding: 0 16px 100px; }
 
-  /* header */
   .header { padding: 56px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
   .header-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
   .header h1 { font-size: 28px; font-weight: 600; line-height: 1.1; }
@@ -45,50 +32,39 @@
   .countdown-label { font-family: var(--mono); font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
   .countdown-val { font-family: var(--mono); font-size: 13px; color: var(--muted); }
 
-  /* tabs */
   .tabs { display: flex; gap: 4px; margin-bottom: 28px; background: var(--surface); border-radius: var(--radius); padding: 4px; border: 1px solid var(--border); }
   .tab { flex: 1; padding: 9px 6px; border: none; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 13px; font-weight: 500; border-radius: 9px; cursor: pointer; transition: all 0.15s; }
   .tab.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
 
-  /* cards */
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; }
   .card-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 
-  /* inputs */
   input[type="text"], input[type="password"] { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; color: var(--text); font-family: var(--sans); font-size: 15px; padding: 11px 14px; outline: none; transition: border-color 0.15s; }
   input[type="text"]:focus, input[type="password"]:focus { border-color: var(--dim); }
 
-  /* buttons */
-  .btn { display: block; width: 100%; padding: 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--text); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; position: relative; }
+  .btn { display: block; width: 100%; padding: 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--text); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; }
   .btn:hover:not(:disabled) { border-color: var(--dim); background: #2e2e32; }
   .btn:active:not(:disabled) { transform: scale(0.98); }
   .btn:disabled { opacity: 0.38; cursor: default; }
   .btn-primary { background: var(--text); color: var(--bg); border-color: transparent; font-weight: 600; }
   .btn-primary:hover:not(:disabled) { background: #d8d8d5; border-color: transparent; }
 
-  /* spinner */
   @keyframes spin { to { transform: rotate(360deg); } }
   .spinner { width: 16px; height: 16px; border: 2px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; flex-shrink: 0; }
 
-  /* full-screen loader */
-  #page-loader {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
-    z-index: 200; transition: opacity 0.3s;
-  }
+  #page-loader { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; z-index: 200; transition: opacity 0.3s; }
   #page-loader.hidden { opacity: 0; pointer-events: none; }
   .loader-ring { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--muted); border-radius: 50%; animation: spin 0.9s linear infinite; }
   .loader-text { font-family: var(--mono); font-size: 12px; color: var(--dim); }
 
-  /* bet buttons */
   .bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .bet-btn { padding: 20px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface2); color: var(--muted); font-family: var(--mono); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; text-align: center; letter-spacing: 0.05em; }
   .bet-btn .bet-icon { font-size: 26px; display: block; margin-bottom: 8px; }
-  .bet-btn:hover { border-color: var(--dim); }
+  .bet-btn:hover:not(:disabled) { border-color: var(--dim); }
   .bet-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .bet-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
+  .bet-btn:disabled { cursor: default; }
 
-  /* leaderboard */
   .lb-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .lb-row:last-child { border-bottom: none; }
   .lb-rank { font-family: var(--mono); font-size: 12px; color: var(--muted); width: 28px; flex-shrink: 0; }
@@ -101,12 +77,10 @@
   .pct-bar { height: 3px; background: var(--surface2); border-radius: 2px; margin-top: 4px; overflow: hidden; }
   .pct-fill { height: 100%; border-radius: 2px; background: var(--ontime); }
 
-  /* chips */
   .chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-family: var(--mono); margin: 3px; }
   .chip-late { background: var(--late-bg); color: var(--late); border: 1px solid var(--late-border); }
   .chip-ontime { background: var(--ontime-bg); color: var(--ontime); border: 1px solid var(--ontime-border); }
 
-  /* history */
   .hist-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .hist-row:last-child { border-bottom: none; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
@@ -118,41 +92,33 @@
   .ontime-color { color: var(--ontime); }
   .hist-score { font-family: var(--mono); font-size: 11px; color: var(--dim); }
 
-  /* stats */
   .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
   .stat-val { font-family: var(--mono); font-size: 28px; font-weight: 500; }
   .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
-  /* result buttons */
   .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
   .result-btn { padding: 14px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface2); color: var(--muted); font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
   .result-btn.sel-late { background: var(--late-bg); border-color: var(--late); color: var(--late); }
   .result-btn.sel-ontime { background: var(--ontime-bg); border-color: var(--ontime); color: var(--ontime); }
   .result-btn:disabled { cursor: default; }
 
-  /* today's result banner on bet tab */
   .result-banner { border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
   .result-banner.r-late { background: var(--late-bg); border: 1px solid var(--late-border); }
   .result-banner.r-ontime { background: var(--ontime-bg); border: 1px solid var(--ontime-border); }
-  .result-banner.r-nobет { background: var(--surface); border: 1px solid var(--border); }
+  .result-banner.r-nobet { background: var(--surface); border: 1px solid var(--border); }
   .result-banner-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
   .result-banner-main { font-size: 15px; font-weight: 600; }
-  .result-banner-main.late-color { color: var(--late); }
-  .result-banner-main.ontime-color { color: var(--ontime); }
   .result-banner-sub { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
 
-  /* hash output box */
   .hash-output { font-family: var(--mono); font-size: 11px; color: var(--accent); background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 9px 12px; word-break: break-all; min-height: 36px; }
 
-  /* modal */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 150; padding: 24px; }
   .modal { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 100%; max-width: 360px; }
   .modal h2 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
   .modal p { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
   .modal input { margin-bottom: 12px; }
 
-  /* result popup */
   .result-popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 160; padding: 24px; }
   .result-popup { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px 24px; width: 100%; max-width: 340px; text-align: center; }
   .result-popup-icon { font-size: 56px; margin-bottom: 16px; }
@@ -163,9 +129,7 @@
   .result-popup.correct .result-popup-title { color: var(--ontime); }
   .result-popup.wrong { border-color: var(--late-border); }
   .result-popup.wrong .result-popup-title { color: var(--late); }
-  .result-popup.nobет { border-color: var(--border); }
 
-  /* toast */
   .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: 24px; font-size: 14px; font-weight: 500; opacity: 0; transition: all 0.25s; pointer-events: none; white-space: nowrap; z-index: 999; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -200,7 +164,7 @@
     <p>Only affects your device. Past bets under the old name stay as-is.</p>
     <input type="text" id="rename-input" placeholder="New name…" maxlength="24" />
     <button class="btn btn-primary" onclick="confirmRename()" style="margin-bottom:8px;">Save</button>
-    <button class="btn" onclick="closeModal('rename-modal')">Cancel</button>
+    <button class="btn" onclick="document.getElementById('rename-modal').style.display='none'">Cancel</button>
   </div>
 </div>
 
@@ -255,7 +219,7 @@
       </div>
       <div class="card">
         <div class="card-label">Today's bets <span id="today-count" style="color:var(--dim);"></span></div>
-        <div id="today-bets-list"><div class="empty" style="padding:16px 0;">No bets placed yet</div></div>
+        <div id="today-bets-list"><div class="empty" style="padding:16px 0;">Place your bet to see others'</div></div>
       </div>
     </div>
 
@@ -287,24 +251,22 @@
 
     <!-- ADMIN TAB -->
     <div id="tab-admin" style="display:none;">
-      <!-- locked -->
       <div id="admin-locked" class="card">
         <div class="card-label" style="color:var(--accent);">Admin access</div>
         <p style="font-size:14px;color:var(--muted);margin-bottom:14px;">Enter the password to record today's result.</p>
         <input type="password" id="admin-pw-input" placeholder="Password…" style="margin-bottom:12px;" />
         <button class="btn btn-primary" id="unlock-btn" onclick="tryUnlock()">Unlock</button>
         <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px;">
-          <button onclick="toggleHashGen()" id="hash-gen-toggle" style="background:none;border:none;font-family:var(--mono);font-size:11px;color:var(--dim);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;padding:4px 0;width:100%;text-align:left;">▶ Generate a new password hash</button>
-          <div id="hash-gen-body" style="display:none;margin-top:10px;display:none;flex-direction:column;gap:8px;">
-            <p style="font-size:12px;color:var(--muted);line-height:1.5;">Type a new password, copy the hash, and paste it as <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">ADMIN_HASH</code> in the source file.</p>
-            <input type="password" id="hash-input" placeholder="New password…" oninput="generateHash()" />
+          <button onclick="toggleHashGen()" id="hash-gen-toggle" style="background:none;border:none;font-family:var(--mono);font-size:11px;color:var(--dim);cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;padding:4px 0;width:100%;text-align:left;">▶ Generate a password hash</button>
+          <div id="hash-gen-body" style="display:none;flex-direction:column;gap:8px;margin-top:10px;">
+            <p style="font-size:12px;color:var(--muted);line-height:1.5;">Outputs corresponding password hash for <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">ADMIN_HASH</code>.</p>
+            <input type="password" id="hash-input" placeholder="Password to hash…" oninput="generateHash()" />
             <div class="hash-output" id="hash-output">hash will appear here</div>
             <button class="btn" onclick="copyHash()" style="padding:9px;">Copy hash</button>
           </div>
         </div>
       </div>
 
-      <!-- unlocked -->
       <div id="admin-unlocked" style="display:none;">
         <div class="card">
           <div class="card-label" style="color:var(--accent);">Record today's result</div>
@@ -330,11 +292,9 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────
-const JSONBIN_ACCESS_KEY = '$2a$10$IbZRC80a7Ds2N3gffoccxuPw2RRPQomOpplCxEHV9J8LbTM11NYoG';
-const JSONBIN_BIN        = '69f9bd1c856a682189aacdc7';
-const TARGET_NAME        = 'Emil';
-const ADMIN_HASH         = 'e35c589aaa82e56c3b9f5142048aa68d6f2c9d56563bf4a99cab06899887e1f3';
+// ── CONFIG —————————————————————————————————————————————————──────
+const WORKER_URL  = 'late-tracker.joshua-crawford.workers.dev';
+const TARGET_NAME = 'Emil'; 
 // ─────────────────────────────────────────────────────────────────
 
 const COLORS = ['#7b61e8','#3aad72','#e8533a','#e8a83a','#3a9de8','#e83a9d','#3ae8d4','#a8e83a'];
@@ -342,165 +302,155 @@ function colorFor(n){ let h=0; for(let c of n) h=(h*31+c.charCodeAt(0))%COLORS.l
 function initials(n){ return n.trim().split(/\s+/).map(w=>w[0]).join('').toUpperCase().slice(0,2)||'?'; }
 function todayKey(){ return new Date().toLocaleDateString('en-CA'); }
 function fmtDate(d){ return new Date(d+'T12:00:00').toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'}); }
-
-async function sha256(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
+async function sha256(str){ const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str)); return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join(''); }
 
 let myName = localStorage.getItem('lt_name')||'';
+let adminPassword = ''; // kept in memory only for the session, never stored
 let adminUnlocked = false;
 let editMode = false;
 let data = { todayBets:{}, history:[], scores:{} };
 let currentBet = null, pendingResult = null;
 
-// ── JSONBin ──
-const BIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN}`;
-const BIN_HEADERS_READ  = { 'X-Access-Key': JSONBIN_ACCESS_KEY, 'X-Bin-Meta': 'false' };
-const BIN_HEADERS_WRITE = { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_ACCESS_KEY };
-
-async function readBin(){
-  const r = await fetch(BIN_URL+'/latest', { headers: BIN_HEADERS_READ });
-  if(!r.ok) throw new Error(r.status);
+// ── Worker API ──
+async function apiGet(){
+  const r = await fetch(WORKER_URL+'/data');
+  if(!r.ok) throw new Error('Load failed');
   return r.json();
 }
-async function writeBin(d){
-  const r = await fetch(BIN_URL, { method:'PUT', headers: BIN_HEADERS_WRITE, body: JSON.stringify(d) });
-  if(!r.ok) throw new Error(r.status);
+async function apiPost(path, body){
+  const r = await fetch(WORKER_URL+path, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+  });
+  const json = await r.json();
+  if(!r.ok) throw new Error(json.error||'Request failed');
+  return json;
 }
-
-// ── Countdown ──
-function updateCountdown(){
-  const now = new Date();
-  const midnight = new Date(now); midnight.setHours(24,0,0,0);
-  const diff = Math.max(0, midnight - now);
-  const h = String(Math.floor(diff/3600000)).padStart(2,'0');
-  const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-  const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-  const el = document.getElementById('countdown');
-  if(el) el.textContent = `${h}:${m}:${s}`;
-}
-setInterval(updateCountdown, 1000);
 
 // ── Boot ──
-async function boot(){
+function boot(){
   document.getElementById('hdr-target').textContent = TARGET_NAME;
   document.getElementById('stat-late-label').textContent = TARGET_NAME+"'s late rate";
   document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   document.getElementById('hdr-name').textContent = '— betting as '+myName+' (tap to change)';
   document.getElementById('main-app').style.display = '';
   updateCountdown();
-  await fetchData();
-  checkPopupOnLoad();
-  // hide page loader
-  const loader = document.getElementById('page-loader');
-  loader.classList.add('hidden');
-  setTimeout(()=>loader.style.display='none', 350);
+  fetchData().then(()=>{
+    checkPopupOnLoad();
+    const loader = document.getElementById('page-loader');
+    loader.classList.add('hidden');
+    setTimeout(()=>loader.style.display='none', 350);
+  });
 }
 
-window.addEventListener('DOMContentLoaded', async ()=>{
+window.addEventListener('DOMContentLoaded', ()=>{
   if(!myName){
     const loader = document.getElementById('page-loader');
     loader.classList.add('hidden');
     setTimeout(()=>{ loader.style.display='none'; document.getElementById('name-modal').style.display='flex'; }, 300);
   } else {
-    await boot();
+    boot();
   }
 });
 
 function saveNameFromModal(){
-  const v = document.getElementById('modal-name').value.trim();
+  const v=document.getElementById('modal-name').value.trim();
   if(!v) return toast('Enter your name first');
-  myName = v;
-  localStorage.setItem('lt_name', v);
-  document.getElementById('name-modal').style.display = 'none';
-  document.getElementById('page-loader').style.display = 'flex';
+  myName=v; localStorage.setItem('lt_name',v);
+  document.getElementById('name-modal').style.display='none';
+  document.getElementById('page-loader').style.display='flex';
   document.getElementById('page-loader').classList.remove('hidden');
   boot();
 }
-document.getElementById('modal-name').addEventListener('keydown', e=>{ if(e.key==='Enter') saveNameFromModal(); });
+document.getElementById('modal-name').addEventListener('keydown',e=>{ if(e.key==='Enter') saveNameFromModal(); });
 
 function promptRename(){
-  document.getElementById('rename-input').value = myName;
-  document.getElementById('rename-modal').style.display = 'flex';
-  setTimeout(()=>document.getElementById('rename-input').focus(), 50);
+  document.getElementById('rename-input').value=myName;
+  document.getElementById('rename-modal').style.display='flex';
+  setTimeout(()=>document.getElementById('rename-input').focus(),50);
 }
 function confirmRename(){
-  const v = document.getElementById('rename-input').value.trim();
+  const v=document.getElementById('rename-input').value.trim();
   if(!v) return toast('Enter a name');
-  myName = v;
-  localStorage.setItem('lt_name', v);
-  closeModal('rename-modal');
-  document.getElementById('hdr-name').textContent = '— betting as '+myName+' (tap to change)';
+  myName=v; localStorage.setItem('lt_name',v);
+  document.getElementById('rename-modal').style.display='none';
+  document.getElementById('hdr-name').textContent='— betting as '+myName+' (tap to change)';
   checkBetStatus();
   toast('Name updated');
 }
-document.getElementById('rename-input').addEventListener('keydown', e=>{ if(e.key==='Enter') confirmRename(); });
-function closeModal(id){ document.getElementById(id).style.display='none'; }
+document.getElementById('rename-input').addEventListener('keydown',e=>{ if(e.key==='Enter') confirmRename(); });
+
+// ── Countdown ──
+function updateCountdown(){
+  const now=new Date(), midnight=new Date(now); midnight.setHours(24,0,0,0);
+  const diff=Math.max(0,midnight-now);
+  const h=String(Math.floor(diff/3600000)).padStart(2,'0');
+  const m=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  const s=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  const el=document.getElementById('countdown'); if(el) el.textContent=`${h}:${m}:${s}`;
+}
+setInterval(updateCountdown,1000);
 
 // ── Data ──
 async function fetchData(){
   try {
-    data = await readBin();
-    data.todayBets = data.todayBets||{};
-    data.history   = data.history||[];
-    data.scores    = data.scores||{};
+    data = await apiGet();
+    data.todayBets=data.todayBets||{}; data.history=data.history||[]; data.scores=data.scores||{};
     renderAll();
-  } catch(e){
-    toast('Could not load data — check connection');
-  }
+  } catch(e){ toast('Could not load data — check connection'); }
 }
 
-// Called once on boot after first fetchData — shows popup if result already recorded today
 function checkPopupOnLoad(){
-  const key = todayKey();
-  const seenKey = 'lt_popup_seen_'+key;
-  if(localStorage.getItem(seenKey)) return; // already dismissed today
-  const todayResult = (data.history||[]).find(h=>h.date===key);
-  if(todayResult){
-    showResultPopup(todayResult.result, todayResult.bets);
-  }
+  const key=todayKey(), seenKey='lt_popup_seen_'+key;
+  if(localStorage.getItem(seenKey)) return;
+  const todayResult=(data.history||[]).find(h=>h.date===key);
+  if(todayResult) showResultPopup(todayResult.result, todayResult.bets);
 }
 
 // ── Tabs ──
 function showTab(t){
   ['bet','leaderboard','history','admin'].forEach(x=>{
-    document.getElementById('tab-'+x).style.display = x===t?'':'none';
+    document.getElementById('tab-'+x).style.display=x===t?'':'none';
   });
   document.querySelectorAll('.tab').forEach((el,i)=>{
-    el.classList.toggle('active', ['bet','leaderboard','history','admin'][i]===t);
+    el.classList.toggle('active',['bet','leaderboard','history','admin'][i]===t);
   });
   if(t==='leaderboard'||t==='history') fetchData();
 }
 
 // ── Render ──
 function renderAll(){
-  renderTodayBets();
-  renderLeaderboard();
-  renderHistory();
-  checkBetStatus();
-  checkResultStatus();
-  renderResultBanner();
+  renderTodayBets(); renderLeaderboard(); renderHistory();
+  checkBetStatus(); checkResultStatus(); renderResultBanner();
 }
 
 function renderTodayBets(){
-  const bets = data.todayBets[todayKey()]||{};
-  const names = Object.keys(bets);
-  const el = document.getElementById('today-bets-list');
-  document.getElementById('today-count').textContent = names.length?`(${names.length})`:'';
+  const key=todayKey();
+  const myBet=(data.todayBets[key]||{})[myName];
+  const resultRecorded=!!(data.history||[]).find(h=>h.date===key);
+  const canSee = !!myBet || resultRecorded;
+
+  const bets=data.todayBets[key]||{};
+  const names=Object.keys(bets);
+  const el=document.getElementById('today-bets-list');
+  document.getElementById('today-count').textContent=canSee&&names.length?`(${names.length})`:'';
+
+  if(!canSee){
+    el.innerHTML='<div class="empty" style="padding:16px 0;font-size:13px;">Place your bet to see others\'</div>';
+    return;
+  }
   if(!names.length){ el.innerHTML='<div class="empty" style="padding:16px 0;">No bets placed yet</div>'; return; }
-  el.innerHTML = names.map(n=>`<span class="chip ${bets[n]==='late'?'chip-late':'chip-ontime'}">${initials(n)} ${n.split(' ')[0]}: ${bets[n]==='late'?'Late':'On time'}</span>`).join('');
+  el.innerHTML=names.map(n=>`<span class="chip ${bets[n]==='late'?'chip-late':'chip-ontime'}">${initials(n)} ${n.split(' ')[0]}: ${bets[n]==='late'?'Late':'On time'}</span>`).join('');
 }
 
 function renderLeaderboard(){
-  const scores = Object.entries(data.scores||{}).sort((a,b)=>{
+  const scores=Object.entries(data.scores||{}).sort((a,b)=>{
     const pa=a[1].total?a[1].correct/a[1].total:0, pb=b[1].total?b[1].correct/b[1].total:0;
     return pb-pa||b[1].correct-a[1].correct;
   });
-  const el = document.getElementById('leaderboard-list');
+  const el=document.getElementById('leaderboard-list');
   if(!scores.length){ el.innerHTML='<div class="empty">No scores yet — place some bets!</div>'; return; }
   const medals=['1st','2nd','3rd'];
-  el.innerHTML = scores.map(([name,s],i)=>{
+  el.innerHTML=scores.map(([name,s],i)=>{
     const pct=s.total?Math.round(s.correct/s.total*100):0, col=colorFor(name);
     return `<div class="lb-row">
       <span class="lb-rank${i===0?' gold':''}">${medals[i]||(i+1)+'th'}</span>
@@ -514,8 +464,8 @@ function renderLeaderboard(){
     </div>`;
   }).join('');
   const hist=data.history||[], late=hist.filter(h=>h.result==='late').length;
-  document.getElementById('stat-late-pct').textContent = hist.length?Math.round(late/hist.length*100)+'%':'—';
-  document.getElementById('stat-days').textContent = hist.length;
+  document.getElementById('stat-late-pct').textContent=hist.length?Math.round(late/hist.length*100)+'%':'—';
+  document.getElementById('stat-days').textContent=hist.length;
 }
 
 function renderHistory(){
@@ -532,26 +482,23 @@ function renderHistory(){
 }
 
 function checkBetStatus(){
-  const key = todayKey();
-  const myBet = (data.todayBets[key]||{})[myName];
-  const resultRecorded = !!(data.history||[]).find(h=>h.date===key);
-  const locked = !!myBet || resultRecorded;
+  const key=todayKey();
+  const myBet=(data.todayBets[key]||{})[myName];
+  const resultRecorded=!!(data.history||[]).find(h=>h.date===key);
+  const locked=!!myBet||resultRecorded;
 
-  // lock/unlock the choice buttons
-  document.getElementById('btn-late').disabled = locked;
-  document.getElementById('btn-ontime').disabled = locked;
-  document.getElementById('btn-late').style.opacity = locked ? '0.45' : '';
-  document.getElementById('btn-ontime').style.opacity = locked ? '0.45' : '';
-  document.getElementById('btn-late').style.cursor = locked ? 'default' : '';
-  document.getElementById('btn-ontime').style.cursor = locked ? 'default' : '';
+  document.getElementById('btn-late').disabled=locked;
+  document.getElementById('btn-ontime').disabled=locked;
+  document.getElementById('btn-late').style.opacity=locked?'0.45':'';
+  document.getElementById('btn-ontime').style.opacity=locked?'0.45':'';
 
   if(myBet){
-    selectBet(myBet, true);
+    selectBet(myBet,true);
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-feedback').textContent = resultRecorded ? 'Betting closed — result recorded' : 'Bet placed ✓';
+    document.getElementById('bet-feedback').textContent=resultRecorded?'Betting closed — result recorded':'Bet placed ✓';
   } else if(resultRecorded){
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-feedback').textContent = 'Betting closed — result already recorded for today';
+    document.getElementById('bet-feedback').textContent='Betting closed — result already recorded';
   } else {
     document.getElementById('submit-bet-btn').disabled=currentBet===null;
     document.getElementById('bet-feedback').textContent='';
@@ -559,57 +506,43 @@ function checkBetStatus(){
 }
 
 function checkResultStatus(){
-  const already = (data.history||[]).find(h=>h.date===todayKey());
-  const locked = !!already && !editMode;
+  const already=(data.history||[]).find(h=>h.date===todayKey());
+  const locked=!!already&&!editMode;
+  const resLate=document.getElementById('res-late'), resOntime=document.getElementById('res-ontime');
+  const submitBtn=document.getElementById('submit-result-btn'), editBtn=document.getElementById('edit-result-btn');
 
-  const resLate   = document.getElementById('res-late');
-  const resOntime = document.getElementById('res-ontime');
-  const submitBtn = document.getElementById('submit-result-btn');
-  const editBtn   = document.getElementById('edit-result-btn');
-  const feedback  = document.getElementById('result-feedback');
+  resLate.disabled=locked; resOntime.disabled=locked;
+  resLate.style.opacity=locked?'0.45':''; resOntime.style.opacity=locked?'0.45':'';
 
-  resLate.disabled   = locked;
-  resOntime.disabled = locked;
-  resLate.style.opacity   = locked ? '0.45' : '';
-  resOntime.style.opacity = locked ? '0.45' : '';
-
-  if(already && !editMode){
-    // show which was recorded, locked
-    resLate.className   = 'result-btn'+(already.result==='late'?' sel-late':'');
-    resOntime.className = 'result-btn'+(already.result==='ontime'?' sel-ontime':'');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Record & score everyone';
-    feedback.textContent = `Recorded: ${already.result==='late'?'Late':'On time'} — ${(already.winners||[]).length} correct`;
-    editBtn.style.display = '';
+  if(already&&!editMode){
+    resLate.className='result-btn'+(already.result==='late'?' sel-late':'');
+    resOntime.className='result-btn'+(already.result==='ontime'?' sel-ontime':'');
+    submitBtn.disabled=true; submitBtn.textContent='Record & score everyone';
+    document.getElementById('result-feedback').textContent=`Recorded: ${already.result==='late'?'Late':'On time'} — ${(already.winners||[]).length} correct`;
+    editBtn.style.display='';
   } else if(editMode){
-    submitBtn.disabled = pendingResult === null;
-    submitBtn.textContent = 'Save corrected result';
-    feedback.textContent = 'Pick the correct result above, then save.';
-    editBtn.style.display = 'none';
+    submitBtn.disabled=pendingResult===null; submitBtn.textContent='Save corrected result';
+    document.getElementById('result-feedback').textContent='Pick the correct result above, then save.';
+    editBtn.style.display='none';
   } else {
-    submitBtn.disabled = pendingResult === null;
-    submitBtn.textContent = 'Record & score everyone';
-    feedback.textContent = '';
-    editBtn.style.display = 'none';
+    submitBtn.disabled=pendingResult===null; submitBtn.textContent='Record & score everyone';
+    document.getElementById('result-feedback').textContent=''; editBtn.style.display='none';
   }
 }
 
 function renderResultBanner(){
-  const key = todayKey();
-  const todayEntry = (data.history||[]).find(h=>h.date===key);
-  const banner = document.getElementById('result-banner');
+  const key=todayKey();
+  const todayEntry=(data.history||[]).find(h=>h.date===key);
+  const banner=document.getElementById('result-banner');
   if(!todayEntry){ banner.style.display='none'; banner.innerHTML=''; return; }
 
-  const result  = todayEntry.result;
-  const myBet   = (todayEntry.bets||{})[myName];
-  const correct = myBet && myBet === result;
-  const noBet   = !myBet;
-
-  let cls, icon, mainText, mainCls, subText;
+  const result=todayEntry.result, myBet=(todayEntry.bets||{})[myName];
+  const correct=myBet&&myBet===result, noBet=!myBet;
+  let cls,icon,mainText,mainCls,subText;
   if(noBet){
-    cls='r-nobет'; icon='😶';
+    cls='r-nobet'; icon='😶';
     mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} today`;
-    mainCls=''; subText='You didn\'t bet today — no points.';
+    mainCls=''; subText="You didn't bet today — no points.";
   } else if(correct){
     cls=result==='late'?'r-late':'r-ontime'; icon='🎉';
     mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you got it!`;
@@ -619,80 +552,78 @@ function renderResultBanner(){
     mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you were wrong`;
     mainCls=result==='late'?'late-color':'ontime-color'; subText=`You bet ${myBet==='late'?'late':'on time'}`;
   }
-
-  banner.className=`result-banner ${cls}`;
-  banner.style.display='flex';
-  banner.innerHTML=`
-    <div class="result-banner-icon">${icon}</div>
-    <div>
-      <div class="result-banner-main ${mainCls}">${mainText}</div>
-      <div class="result-banner-sub">${subText}</div>
-    </div>`;
+  banner.className=`result-banner ${cls}`; banner.style.display='flex';
+  banner.innerHTML=`<div class="result-banner-icon">${icon}</div><div><div class="result-banner-main ${mainCls}">${mainText}</div><div class="result-banner-sub">${subText}</div></div>`;
 }
 
 // ── Betting ──
-function selectBet(choice, silent){
+function selectBet(choice,silent){
   currentBet=choice;
   document.getElementById('btn-late').className='bet-btn'+(choice==='late'?' sel-late':'');
   document.getElementById('btn-ontime').className='bet-btn'+(choice==='ontime'?' sel-ontime':'');
   if(!silent) document.getElementById('submit-bet-btn').disabled=false;
 }
 
-function setBtnLoading(btnId, label, on){
-  const btn = document.getElementById(btnId);
-  btn.disabled = on;
-  btn.innerHTML = on
-    ? `<span class="spinner"></span>${label}`
-    : label;
+function setBtnLoading(btnId,label,on){
+  const btn=document.getElementById(btnId);
+  btn.disabled=on;
+  btn.innerHTML=on?`<span class="spinner"></span>${label}`:label;
 }
 
 async function submitBet(){
   if(!myName) return toast('Set your name first');
   if(!currentBet) return toast('Pick late or on time');
-  setBtnLoading('submit-bet-btn', 'Place bet', true);
+  setBtnLoading('submit-bet-btn','Place bet',true);
   document.getElementById('bet-feedback').textContent='Submitting…';
-  const key=todayKey();
   try {
-    await fetchData();
-    if(!data.todayBets[key]) data.todayBets[key]={};
-    if(data.todayBets[key][myName]){ checkBetStatus(); setBtnLoading('submit-bet-btn','Place bet',false); return toast('Already bet today!'); }
-    data.todayBets[key][myName]=currentBet;
-    await writeBin(data);
+    await apiPost('/bet',{ name:myName, choice:currentBet, date:todayKey() });
+    // Refresh data so the bets list shows up-to-date
+    data = await apiGet();
+    data.todayBets=data.todayBets||{}; data.history=data.history||[]; data.scores=data.scores||{};
+    renderAll();
     document.getElementById('submit-bet-btn').disabled=true;
     document.getElementById('submit-bet-btn').textContent='Place bet';
     document.getElementById('bet-feedback').textContent='Bet placed ✓';
-    renderTodayBets();
     toast(currentBet==='late'?'Bet placed: Late!':'Bet placed: On time!');
   } catch(e){
     setBtnLoading('submit-bet-btn','Place bet',false);
     document.getElementById('bet-feedback').textContent='';
-    toast('Could not save — check connection');
+    toast(e.message||'Could not save — check connection');
   }
 }
 
 // ── Admin ──
 async function tryUnlock(){
-  const pw = document.getElementById('admin-pw-input').value;
+  const pw=document.getElementById('admin-pw-input').value;
   if(!pw) return toast('Enter the password');
-  setBtnLoading('unlock-btn', 'Unlock', true);
-  const hash = await sha256(pw);
-  setBtnLoading('unlock-btn', 'Unlock', false);
-  if(hash === ADMIN_HASH){
+  // Just verify locally that something was typed, actual check happens server-side on submit
+  // We keep the password in memory to send with each admin action
+  setBtnLoading('unlock-btn','Unlock',true);
+  try {
+    // Probe the server with a dummy clear-like request to verify password without side effects
+    // Instead, we just unlock optimistically and let the server reject if wrong on first action.
+    // Better UX: verify immediately by calling a lightweight /verify endpoint.
+    // We'll use /result with an impossible date to verify the password cheaply.
+    const testHash = await sha256(pw);
+    // We verify by checking against a known hash but we don't have it client-side anymore.
+    // Solution: store the pw in memory, server verifies on actual action.
+    // The unlock button just gates the UI, the password is verified on first real action.
+    adminPassword=pw;
     adminUnlocked=true;
     document.getElementById('admin-locked').style.display='none';
     document.getElementById('admin-unlocked').style.display='';
+    setBtnLoading('unlock-btn','Unlock',false);
     fetchData();
-    toast('Admin unlocked');
-  } else {
-    toast('Wrong password');
-    document.getElementById('admin-pw-input').value='';
+    toast('Admin unlocked — password verified on first action');
+  } catch(e){
+    setBtnLoading('unlock-btn','Unlock',false);
+    toast('Something went wrong');
   }
 }
-document.getElementById('admin-pw-input').addEventListener('keydown', e=>{ if(e.key==='Enter') tryUnlock(); });
+document.getElementById('admin-pw-input').addEventListener('keydown',e=>{ if(e.key==='Enter') tryUnlock(); });
 
 function lockAdmin(){
-  adminUnlocked=false;
-  editMode=false;
+  adminUnlocked=false; editMode=false; adminPassword='';
   document.getElementById('admin-locked').style.display='';
   document.getElementById('admin-unlocked').style.display='none';
   document.getElementById('admin-pw-input').value='';
@@ -707,150 +638,99 @@ function selectResult(choice){
 }
 
 function startEditResult(){
-  editMode = true;
-  pendingResult = null;
-  document.getElementById('res-late').className = 'result-btn';
-  document.getElementById('res-ontime').className = 'result-btn';
+  editMode=true; pendingResult=null;
+  document.getElementById('res-late').className='result-btn';
+  document.getElementById('res-ontime').className='result-btn';
   checkResultStatus();
   toast('Select the corrected result');
 }
 
 async function submitResult(){
   if(!pendingResult) return;
-  const key = todayKey();
-  const label = editMode ? 'Save corrected result' : 'Record & score everyone';
-  setBtnLoading('submit-result-btn', label, true);
+  const label=editMode?'Save corrected result':'Record & score everyone';
+  setBtnLoading('submit-result-btn',label,true);
   try {
-    await fetchData();
-    const existingEntry = (data.history||[]).find(h=>h.date===key);
-
-    if(editMode){
-      // ── EDIT PATH: undo old scores, apply new ──
-      if(!existingEntry){ editMode=false; checkResultStatus(); setBtnLoading('submit-result-btn','Record & score everyone',false); return toast('No result to edit'); }
-      const oldResult = existingEntry.result;
-      const bets = existingEntry.bets||{};
-      // undo
-      for(const [name, bet] of Object.entries(bets)){
-        if(data.scores[name]){
-          data.scores[name].total = Math.max(0, data.scores[name].total - 1);
-          if(bet === oldResult) data.scores[name].correct = Math.max(0, data.scores[name].correct - 1);
-        }
-      }
-      // reapply
-      const winners=[], losers=[];
-      for(const [name, bet] of Object.entries(bets)){
-        if(!data.scores[name]) data.scores[name]={correct:0,total:0};
-        data.scores[name].total++;
-        if(bet===pendingResult){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
-      }
-      existingEntry.result = pendingResult;
-      existingEntry.winners = winners;
-      existingEntry.losers = losers;
-      await writeBin(data);
-      editMode = false;
-      pendingResult = null;
-      setBtnLoading('submit-result-btn','Record & score everyone',false);
-      renderAll();
-      toast('Result corrected & scores updated');
-
-    } else {
-      // ── NEW RECORD PATH ──
-      if(existingEntry){
-        editMode=false; checkResultStatus();
-        setBtnLoading('submit-result-btn','Record & score everyone',false);
-        return toast('Already recorded — use Edit to change it');
-      }
-      const bets = data.todayBets[key]||{}, result = pendingResult;
-      const winners=[], losers=[];
-      data.scores = data.scores||{};
-      for(const [name,bet] of Object.entries(bets)){
-        if(!data.scores[name]) data.scores[name]={correct:0,total:0};
-        data.scores[name].total++;
-        if(bet===result){ data.scores[name].correct++; winners.push(name); } else losers.push(name);
-      }
-      data.history = data.history||[];
-      data.history.unshift({date:key, result, bets, winners, losers});
-      await writeBin(data);
-      pendingResult = null;
-      setBtnLoading('submit-result-btn','Record & score everyone',false);
-      renderAll();
-      showResultPopup(result, bets);
-      toast(result==='late'?'Recorded: he was late!':'Recorded: on time!');
-    }
+    const resp = await apiPost('/result',{ password:adminPassword, result:pendingResult, date:todayKey(), edit:editMode });
+    editMode=false; pendingResult=null;
+    document.getElementById('res-late').className='result-btn';
+    document.getElementById('res-ontime').className='result-btn';
+    setBtnLoading('submit-result-btn','Record & score everyone',false);
+    data = await apiGet();
+    data.todayBets=data.todayBets||{}; data.history=data.history||[]; data.scores=data.scores||{};
+    renderAll();
+    const todayEntry=(data.history||[]).find(h=>h.date===todayKey());
+    if(todayEntry&&!editMode) showResultPopup(todayEntry.result, todayEntry.bets);
+    toast(label==='Save corrected result'?'Result corrected & scores updated':(pendingResult==='late'?'Recorded: he was late!':'Recorded: on time!'));
   } catch(e){
-    setBtnLoading('submit-result-btn', editMode?'Save corrected result':'Record & score everyone', false);
-    toast('Could not save — check connection');
+    setBtnLoading('submit-result-btn',label,false);
+    // If server says wrong password, lock admin
+    if(e.message&&e.message.toLowerCase().includes('password')){
+      toast('Wrong password — locked'); lockAdmin();
+    } else {
+      toast(e.message||'Could not save — check connection');
+    }
+  }
+}
+
+async function confirmClear(){
+  if(!confirm('Clear ALL history and scores for everyone? Cannot be undone.')) return;
+  try {
+    await apiPost('/clear',{ password:adminPassword });
+    data={todayBets:{},history:[],scores:{}};
+    renderAll(); toast('All data cleared');
+  } catch(e){
+    if(e.message&&e.message.toLowerCase().includes('password')){ toast('Wrong password — locked'); lockAdmin(); }
+    else toast(e.message||'Could not clear');
   }
 }
 
 // ── Result popup ──
-function showResultPopup(result, bets){
-  const myBet = bets[myName];
-  const popup = document.getElementById('result-popup');
-  const icon  = document.getElementById('popup-icon');
-  const title = document.getElementById('popup-title');
-  const sub   = document.getElementById('popup-sub');
-  const detail= document.getElementById('popup-detail');
-
-  const wasLate = result === 'late';
-  const resultLabel = wasLate ? 'late' : 'on time';
-
-  if(!myBet){
-    popup.className='result-popup nobет';
-    icon.textContent='😶';
-    title.textContent='No bet today';
-    sub.textContent=`${TARGET_NAME} was ${resultLabel}. You didn't place a bet so no points for you.`;
-    detail.textContent='';
+function showResultPopup(result,bets){
+  const myBet=bets[myName], correct=myBet&&myBet===result, noBet=!myBet;
+  const popup=document.getElementById('result-popup');
+  const resultLabel=result==='late'?'late':'on time';
+  if(noBet){
+    popup.className='result-popup';
+    document.getElementById('popup-icon').textContent='😶';
+    document.getElementById('popup-title').textContent='No bet today';
+    document.getElementById('popup-sub').textContent=`${TARGET_NAME} was ${resultLabel}. You didn't place a bet so no points for you.`;
+    document.getElementById('popup-detail').textContent='';
   } else {
-    const correct = myBet === result;
     popup.className='result-popup '+(correct?'correct':'wrong');
-    icon.textContent = correct ? '🎉' : '💀';
-    title.textContent = correct ? 'You got it!' : 'Wrong!';
-    sub.textContent = `${TARGET_NAME} was ${resultLabel} — you bet ${myBet === 'late' ? 'late' : 'on time'}.`;
-    const s = data.scores[myName]||{correct:0,total:0};
-    const pct = s.total ? Math.round(s.correct/s.total*100) : 0;
-    detail.textContent = `Your record: ${s.correct}/${s.total} correct (${pct}%)`;
+    document.getElementById('popup-icon').textContent=correct?'🎉':'💀';
+    document.getElementById('popup-title').textContent=correct?'You got it!':'Wrong!';
+    document.getElementById('popup-sub').textContent=`${TARGET_NAME} was ${resultLabel} — you bet ${myBet==='late'?'late':'on time'}.`;
+    const s=data.scores[myName]||{correct:0,total:0};
+    document.getElementById('popup-detail').textContent=`Your record: ${s.correct}/${s.total} correct (${s.total?Math.round(s.correct/s.total*100):0}%)`;
   }
   document.getElementById('result-popup-overlay').style.display='flex';
 }
-
 function closeResultPopup(){
-  localStorage.setItem('lt_popup_seen_'+todayKey(), '1');
+  localStorage.setItem('lt_popup_seen_'+todayKey(),'1');
   document.getElementById('result-popup-overlay').style.display='none';
 }
 
-// ── Hash generator ──
+// ── Hash generator  ──
 function toggleHashGen(){
-  const body = document.getElementById('hash-gen-body');
-  const btn  = document.getElementById('hash-gen-toggle');
-  const open = body.style.display === 'flex';
-  body.style.display = open ? 'none' : 'flex';
-  btn.textContent = (open ? '▶' : '▼') + ' Generate a new password hash';
+  const body=document.getElementById('hash-gen-body'), btn=document.getElementById('hash-gen-toggle');
+  const open=body.style.display==='flex';
+  body.style.display=open?'none':'flex';
+  btn.textContent=(open?'▶':'▼')+' Generate a password hash';
 }
 let hashDebounce;
 function generateHash(){
   clearTimeout(hashDebounce);
-  const val = document.getElementById('hash-input').value;
+  const val=document.getElementById('hash-input').value;
   if(!val){ document.getElementById('hash-output').textContent='hash will appear here'; return; }
   document.getElementById('hash-output').textContent='computing…';
-  hashDebounce = setTimeout(async ()=>{
-    const h = await sha256(val);
-    document.getElementById('hash-output').textContent = h;
-  }, 300);
+  hashDebounce=setTimeout(async()=>{
+    document.getElementById('hash-output').textContent=await sha256(val);
+  },300);
 }
 function copyHash(){
-  const h = document.getElementById('hash-output').textContent;
+  const h=document.getElementById('hash-output').textContent;
   if(!h||h==='hash will appear here'||h==='computing…') return toast('Enter a password first');
   navigator.clipboard.writeText(h).then(()=>toast('Hash copied!')).catch(()=>toast('Copy failed — select manually'));
-}
-
-// ── Danger zone ──
-async function confirmClear(){
-  if(!confirm('Clear ALL history and scores for everyone? Cannot be undone.')) return;
-  data={todayBets:{},history:[],scores:{}};
-  await writeBin(data);
-  renderAll();
-  toast('All data cleared');
 }
 
 // ── Toast ──
