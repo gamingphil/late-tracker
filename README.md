@@ -56,8 +56,6 @@ GET /data
 }
 ```
 
----
-
 ### `POST /bet`
 
 Place a bet for today.
@@ -88,8 +86,6 @@ Place a bet for today.
 { "error": "You have already placed a bet today" }
 ```
 
----
-
 ### `POST /result`
 
 Record or correct the result for a given day. Admin-only (requires the admin password).
@@ -111,8 +107,6 @@ Set `edit` to `true` to correct an already-recorded result. Scores are recalcula
 ```json
 { "success": true, "winnersCount": 2 }
 ```
-
----
 
 ### `POST /clear`
 
