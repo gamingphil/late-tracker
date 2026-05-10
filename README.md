@@ -1,6 +1,6 @@
 # Late Tracker
 
-A daily betting app my friend group. Every morning everyone predicts whether a specific friend will arrive late. The admin records the actual result, scores are tallied, and a leaderboard tracks who predicts best over time.
+A daily betting app for my friend group. Every morning everyone predicts whether a specific friend will arrive late. The admin records the actual result, scores are tallied, and a leaderboard tracks who predicts best over time.
 
 Built with plain HTML/JS on the frontend and a Cloudflare Worker as the backend, with JSONBin as the data store.
 
