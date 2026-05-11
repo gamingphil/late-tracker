@@ -594,30 +594,23 @@ async function submitBet(){
 
 // ── Admin ──
 async function tryUnlock(){
-  const pw=document.getElementById('admin-pw-input').value;
+  const pw = document.getElementById('admin-pw-input').value;
   if(!pw) return toast('Enter the password');
-  // Just verify locally that something was typed, actual check happens server-side on submit
-  // We keep the password in memory to send with each admin action
-  setBtnLoading('unlock-btn','Unlock',true);
+  setBtnLoading('unlock-btn', 'Unlock', true);
   try {
-    // Probe the server with a dummy clear-like request to verify password without side effects
-    // Instead, we just unlock optimistically and let the server reject if wrong on first action.
-    // Better UX: verify immediately by calling a lightweight /verify endpoint.
-    // We'll use /result with an impossible date to verify the password cheaply.
-    const testHash = await sha256(pw);
-    // We verify by checking against a known hash but we don't have it client-side anymore.
-    // Solution: store the pw in memory, server verifies on actual action.
-    // The unlock button just gates the UI, the password is verified on first real action.
-    adminPassword=pw;
-    adminUnlocked=true;
-    document.getElementById('admin-locked').style.display='none';
-    document.getElementById('admin-unlocked').style.display='';
-    setBtnLoading('unlock-btn','Unlock',false);
+    await apiPost('/verify', { password: pw });
+    // Server confirmed password is correct
+    adminPassword = pw;
+    adminUnlocked = true;
+    document.getElementById('admin-locked').style.display = 'none';
+    document.getElementById('admin-unlocked').style.display = '';
+    setBtnLoading('unlock-btn', 'Unlock', false);
     fetchData();
-    toast('Admin unlocked — password verified on first action');
-  } catch(e){
-    setBtnLoading('unlock-btn','Unlock',false);
-    toast('Something went wrong');
+    toast('Admin unlocked');
+  } catch(e) {
+    setBtnLoading('unlock-btn', 'Unlock', false);
+    document.getElementById('admin-pw-input').value = '';
+    toast('Wrong password');
   }
 }
 document.getElementById('admin-pw-input').addEventListener('keydown',e=>{ if(e.key==='Enter') tryUnlock(); });
