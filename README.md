@@ -85,6 +85,24 @@ Place a bet for today.
 ```json
 { "error": "You have already placed a bet today" }
 ```
+### `POST /verify`
+ 
+Verify the admin password with no side effects. Useful for checking credentials before attempting a write action.
+ 
+**Body**
+```json
+{ "password": "your-admin-password" }
+```
+ 
+**Response (success)**
+```json
+{ "success": true }
+```
+ 
+**Response (error)**
+```json
+{ "error": "Wrong admin password" }
+```
 
 ### `POST /result`
 
