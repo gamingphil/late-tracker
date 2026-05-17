@@ -151,7 +151,7 @@
 <div class="modal-overlay" id="name-modal" style="display:none;">
   <div class="modal">
     <h2>Hey, who are you?</h2>
-    <p>Just your name — so everyone knows whose bet is whose. You only do this once on this device.</p>
+    <p>Just your name, so everyone knows whose bet is whose. You only do this once on this device.</p>
     <input type="text" id="modal-name" placeholder="Your name…" maxlength="24" />
     <button class="btn btn-primary" onclick="saveNameFromModal()">Let's go</button>
   </div>
@@ -396,7 +396,7 @@ async function fetchData(){
     data = await apiGet();
     data.todayBets=data.todayBets||{}; data.history=data.history||[]; data.scores=data.scores||{};
     renderAll();
-  } catch(e){ toast('Could not load data — check connection'); }
+  } catch(e){ toast('Could not load data, check connection'); }
 }
 
 function checkPopupOnLoad(){
@@ -448,7 +448,7 @@ function renderLeaderboard(){
     return pb-pa||b[1].correct-a[1].correct;
   });
   const el=document.getElementById('leaderboard-list');
-  if(!scores.length){ el.innerHTML='<div class="empty">No scores yet — place some bets!</div>'; return; }
+  if(!scores.length){ el.innerHTML='<div class="empty">No scores yet, place some bets!</div>'; return; }
   const medals=['1st','2nd','3rd'];
   el.innerHTML=scores.map(([name,s],i)=>{
     const pct=s.total?Math.round(s.correct/s.total*100):0, col=colorFor(name);
@@ -495,10 +495,10 @@ function checkBetStatus(){
   if(myBet){
     selectBet(myBet,true);
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-feedback').textContent=resultRecorded?'Betting closed — result recorded':'Bet placed ✓';
+    document.getElementById('bet-feedback').textContent=resultRecorded?'Betting closed, result recorded':'Bet placed ✓';
   } else if(resultRecorded){
     document.getElementById('submit-bet-btn').disabled=true;
-    document.getElementById('bet-feedback').textContent='Betting closed — result already recorded';
+    document.getElementById('bet-feedback').textContent='Betting closed, result already recorded';
   } else {
     document.getElementById('submit-bet-btn').disabled=currentBet===null;
     document.getElementById('bet-feedback').textContent='';
@@ -518,7 +518,7 @@ function checkResultStatus(){
     resLate.className='result-btn'+(already.result==='late'?' sel-late':'');
     resOntime.className='result-btn'+(already.result==='ontime'?' sel-ontime':'');
     submitBtn.disabled=true; submitBtn.textContent='Record & score everyone';
-    document.getElementById('result-feedback').textContent=`Recorded: ${already.result==='late'?'Late':'On time'} — ${(already.winners||[]).length} correct`;
+    document.getElementById('result-feedback').textContent=`Recorded: ${already.result==='late'?'Late':'On time'}, ${(already.winners||[]).length} correct`;
     editBtn.style.display='';
   } else if(editMode){
     submitBtn.disabled=pendingResult===null; submitBtn.textContent='Save corrected result';
@@ -542,14 +542,14 @@ function renderResultBanner(){
   if(noBet){
     cls='r-nobet'; icon='😶';
     mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} today`;
-    mainCls=''; subText="You didn't bet today — no points.";
+    mainCls=''; subText="You didn't bet today, no points.";
   } else if(correct){
     cls=result==='late'?'r-late':'r-ontime'; icon='🎉';
-    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you got it!`;
-    mainCls=result==='late'?'late-color':'ontime-color'; subText='Your bet was correct ✓';
+    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'}, you got it`;
+    mainCls=result==='late'?'late-color':'ontime-color'; subText='Your bet was correct';
   } else {
     cls=result==='late'?'r-late':'r-ontime'; icon='💀';
-    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'} — you were wrong`;
+    mainText=`${TARGET_NAME} was ${result==='late'?'late':'on time'}, you were wrong`;
     mainCls=result==='late'?'late-color':'ontime-color'; subText=`You bet ${myBet==='late'?'late':'on time'}`;
   }
   banner.className=`result-banner ${cls}`; banner.style.display='flex';
@@ -588,7 +588,7 @@ async function submitBet(){
   } catch(e){
     setBtnLoading('submit-bet-btn','Place bet',false);
     document.getElementById('bet-feedback').textContent='';
-    toast(e.message||'Could not save — check connection');
+    toast(e.message||'Could not save, check connection');
   }
 }
 
@@ -660,7 +660,7 @@ async function submitResult(){
     if(e.message&&e.message.toLowerCase().includes('password')){
       toast('Wrong password — locked'); lockAdmin();
     } else {
-      toast(e.message||'Could not save — check connection');
+      toast(e.message||'Could not save, check connection');
     }
   }
 }
@@ -692,7 +692,7 @@ function showResultPopup(result,bets){
     popup.className='result-popup '+(correct?'correct':'wrong');
     document.getElementById('popup-icon').textContent=correct?'🎉':'💀';
     document.getElementById('popup-title').textContent=correct?'You got it!':'Wrong!';
-    document.getElementById('popup-sub').textContent=`${TARGET_NAME} was ${resultLabel} — you bet ${myBet==='late'?'late':'on time'}.`;
+    document.getElementById('popup-sub').textContent=`${TARGET_NAME} was ${resultLabel}, you bet ${myBet==='late'?'late':'on time'}.`;
     const s=data.scores[myName]||{correct:0,total:0};
     document.getElementById('popup-detail').textContent=`Your record: ${s.correct}/${s.total} correct (${s.total?Math.round(s.correct/s.total*100):0}%)`;
   }
@@ -723,7 +723,7 @@ function generateHash(){
 function copyHash(){
   const h=document.getElementById('hash-output').textContent;
   if(!h||h==='hash will appear here'||h==='computing…') return toast('Enter a password first');
-  navigator.clipboard.writeText(h).then(()=>toast('Hash copied!')).catch(()=>toast('Copy failed — select manually'));
+  navigator.clipboard.writeText(h).then(()=>toast('Hash copied!')).catch(()=>toast('Copy failed, select manually'));
 }
 
 // ── Toast ──
